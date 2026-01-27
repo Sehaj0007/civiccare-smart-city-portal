@@ -1,0 +1,30 @@
+2026-01-26 17:05:30:530 [31merror[39m: [31m401 - Invalid email or password - /api/auth/login - POST - ::ffff:127.0.0.1[39m
+2026-01-26 17:05:30:530 [31merror[39m: [31mError: Invalid email or password[39m
+[31m    at E:\01. My Data\CivicCare_Smart_City\backend\src\controllers\authController.js:51:17[39m
+2026-01-26 17:11:42:1142 [31merror[39m: [31m400 - Category is required - /api/complaints - POST - ::ffff:127.0.0.1[39m
+2026-01-26 17:11:42:1142 [31merror[39m: [31mError: Category is required[39m
+[31m    at validate (E:\01. My Data\CivicCare_Smart_City\backend\src\middleware\validation.js:8:17)[39m
+[31m    at Layer.handle [as handle_request] (E:\01. My Data\CivicCare_Smart_City\backend\node_modules\express\lib\router\layer.js:95:5)[39m
+[31m    at next (E:\01. My Data\CivicCare_Smart_City\backend\node_modules\express\lib\router\route.js:149:13)[39m
+[31m    at middleware (E:\01. My Data\CivicCare_Smart_City\backend\node_modules\express-validator\lib\middlewares\check.js:16:13)[39m
+[31m    at processTicksAndRejections (node:internal/process/task_queues:105:5)[39m
+2026-01-26 17:11:43:1143 [31merror[39m: [31m401 - Invalid email or password - /api/auth/login - POST - ::ffff:127.0.0.1[39m
+2026-01-26 17:11:43:1143 [31merror[39m: [31mError: Invalid email or password[39m
+[31m    at E:\01. My Data\CivicCare_Smart_City\backend\src\controllers\authController.js:51:17[39m
+2026-01-26 17:14:42:1442 [31merror[39m: [31m401 - Invalid email or password - /api/auth/login - POST - ::1[39m
+2026-01-26 17:14:42:1442 [31merror[39m: [31mError: Invalid email or password[39m
+[31m    at file:///E:/01.%20My%20Data/CivicCare_Smart_City/backend/src/controllers/authController.js:44:17[39m
+[31m    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)[39m
+2026-01-26 18:05:36:536 [31merror[39m: [31m401 - Invalid email or password - /api/auth/admin-login - POST - ::1[39m
+2026-01-26 18:05:36:536 [31merror[39m: [31mError: Invalid email or password[39m
+[31m    at file:///E:/01.%20My%20Data/CivicCare_Smart_City/backend/src/controllers/authController.js:83:17[39m
+2026-01-26 18:05:50:550 [31merror[39m: [31m401 - Invalid email or password - /api/auth/admin-login - POST - ::1[39m
+2026-01-26 18:05:50:550 [31merror[39m: [31mError: Invalid email or password[39m
+[31m    at file:///E:/01.%20My%20Data/CivicCare_Smart_City/backend/src/controllers/authController.js:83:17[39m
+2026-01-26 18:09:36:936 [31merror[39m: [31m400 - Category is required - /api/complaints - POST - ::ffff:127.0.0.1[39m
+2026-01-26 18:09:36:936 [31merror[39m: [31mError: Category is required[39m
+[31m    at validate (E:\01. My Data\CivicCare_Smart_City\backend\src\middleware\validation.js:8:17)[39m
+[31m    at Layer.handle [as handle_request] (E:\01. My Data\CivicCare_Smart_City\backend\node_modules\express\lib\router\layer.js:95:5)[39m
+[31m    at next (E:\01. My Data\CivicCare_Smart_City\backend\node_modules\express\lib\router\route.js:149:13)[39m
+[31m    at middleware (E:\01. My Data\CivicCare_Smart_City\backend\node_modules\express-validator\lib\middlewares\check.js:16:13)[39m
+[31m    at processTicksAndRejections (node:internal/process/task_queues:105:5)[39m

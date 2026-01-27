@@ -1,0 +1,444 @@
+2026-01-26 17:05:30:530 [31merror[39m: [31m401 - Invalid email or password - /api/auth/login - POST - ::ffff:127.0.0.1[39m
+2026-01-26 17:05:30:530 [31merror[39m: [31mError: Invalid email or password[39m
+[31m    at E:\01. My Data\CivicCare_Smart_City\backend\src\controllers\authController.js:51:17[39m
+2026-01-26 17:11:42:1142 [31merror[39m: [31m400 - Category is required - /api/complaints - POST - ::ffff:127.0.0.1[39m
+2026-01-26 17:11:42:1142 [31merror[39m: [31mError: Category is required[39m
+[31m    at validate (E:\01. My Data\CivicCare_Smart_City\backend\src\middleware\validation.js:8:17)[39m
+[31m    at Layer.handle [as handle_request] (E:\01. My Data\CivicCare_Smart_City\backend\node_modules\express\lib\router\layer.js:95:5)[39m
+[31m    at next (E:\01. My Data\CivicCare_Smart_City\backend\node_modules\express\lib\router\route.js:149:13)[39m
+[31m    at middleware (E:\01. My Data\CivicCare_Smart_City\backend\node_modules\express-validator\lib\middlewares\check.js:16:13)[39m
+[31m    at processTicksAndRejections (node:internal/process/task_queues:105:5)[39m
+2026-01-26 17:11:43:1143 [31merror[39m: [31m401 - Invalid email or password - /api/auth/login - POST - ::ffff:127.0.0.1[39m
+2026-01-26 17:11:43:1143 [31merror[39m: [31mError: Invalid email or password[39m
+[31m    at E:\01. My Data\CivicCare_Smart_City\backend\src\controllers\authController.js:51:17[39m
+2026-01-26 17:13:18:1318 [32minfo[39m: [32mMongoDB Connected: localhost[39m
+2026-01-26 17:13:18:1318 [32minfo[39m: [32mServer running on port 5000[39m
+2026-01-26 17:13:18:1318 [32minfo[39m: [32mEnvironment: development[39m
+2026-01-26 17:14:42:1442 [35mhttp[39m: [35m[0mOPTIONS /api/auth/login [32m204[0m 1.452 ms - 0[0m[39m
+2026-01-26 17:14:42:1442 [31merror[39m: [31m401 - Invalid email or password - /api/auth/login - POST - ::1[39m
+2026-01-26 17:14:42:1442 [31merror[39m: [31mError: Invalid email or password[39m
+[31m    at file:///E:/01.%20My%20Data/CivicCare_Smart_City/backend/src/controllers/authController.js:44:17[39m
+[31m    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)[39m
+2026-01-26 17:14:42:1442 [35mhttp[39m: [35m[0mPOST /api/auth/login [33m401[0m 48.778 ms - 55[0m[39m
+2026-01-26 17:16:12:1612 [35mhttp[39m: [35m[0mOPTIONS /api/auth/admin-login [32m204[0m 0.205 ms - 0[0m[39m
+2026-01-26 17:16:12:1612 [35mhttp[39m: [35m[0mPOST /api/auth/admin-login [32m200[0m 143.184 ms - 467[0m[39m
+2026-01-26 17:16:12:1612 [35mhttp[39m: [35m[0mOPTIONS /api/admin/complaints/department/WASTE_MANAGEMENT [32m204[0m 0.262 ms - 0[0m[39m
+2026-01-26 17:16:12:1612 [35mhttp[39m: [35m[0mOPTIONS /api/admin/complaints/department/WASTE_MANAGEMENT [32m204[0m 0.362 ms - 0[0m[39m
+2026-01-26 17:16:13:1613 [35mhttp[39m: [35m[0mGET /api/admin/complaints/department/WASTE_MANAGEMENT [32m200[0m 116.748 ms - 2897838[0m[39m
+2026-01-26 17:16:13:1613 [35mhttp[39m: [35m[0mOPTIONS /api/setup/teams/by-category/WASTE_MANAGEMENT [32m204[0m 0.136 ms - 0[0m[39m
+2026-01-26 17:16:13:1613 [35mhttp[39m: [35m[0mGET /api/admin/complaints/department/WASTE_MANAGEMENT [36m304[0m 86.543 ms - -[0m[39m
+2026-01-26 17:16:13:1613 [35mhttp[39m: [35m[0mGET /api/setup/teams/by-category/WASTE_MANAGEMENT [32m200[0m 11.603 ms - 27[0m[39m
+2026-01-26 17:16:13:1613 [35mhttp[39m: [35m[0mOPTIONS /api/setup/ward-offices [32m204[0m 0.327 ms - 0[0m[39m
+2026-01-26 17:16:13:1613 [35mhttp[39m: [35m[0mGET /api/setup/teams/by-category/WASTE_MANAGEMENT [36m304[0m 15.648 ms - -[0m[39m
+2026-01-26 17:16:13:1613 [35mhttp[39m: [35m[0mGET /api/setup/ward-offices [32m200[0m 14.215 ms - 877[0m[39m
+2026-01-26 17:16:13:1613 [35mhttp[39m: [35m[0mGET /api/setup/ward-offices [36m304[0m 6.996 ms - -[0m[39m
+2026-01-26 17:16:24:1624 [35mhttp[39m: [35m[0mOPTIONS /api/auth/logout [32m204[0m 0.162 ms - 0[0m[39m
+2026-01-26 17:16:24:1624 [35mhttp[39m: [35m[0mGET /api/auth/logout [32m200[0m 0.923 ms - 52[0m[39m
+2026-01-26 17:16:43:1643 [35mhttp[39m: [35m[0mOPTIONS /api/auth/login [32m204[0m 0.165 ms - 0[0m[39m
+2026-01-26 17:16:44:1644 [35mhttp[39m: [35m[0mPOST /api/auth/login [32m200[0m 121.023 ms - 450[0m[39m
+2026-01-26 17:16:44:1644 [35mhttp[39m: [35m[0mOPTIONS /api/complaints/user/6973ad55f25817da624c4796 [32m204[0m 0.342 ms - 0[0m[39m
+2026-01-26 17:16:44:1644 [35mhttp[39m: [35m[0mOPTIONS /api/complaints/user/6973ad55f25817da624c4796 [32m204[0m 0.232 ms - 0[0m[39m
+2026-01-26 17:16:44:1644 [35mhttp[39m: [35m[0mGET /api/complaints/user/6973ad55f25817da624c4796 [32m200[0m 20.269 ms - 724[0m[39m
+2026-01-26 17:16:44:1644 [35mhttp[39m: [35m[0mGET /api/complaints/user/6973ad55f25817da624c4796 [36m304[0m 13.455 ms - -[0m[39m
+2026-01-26 17:16:53:1653 [35mhttp[39m: [35m[0mOPTIONS /api/complaints/detail/6973ad56f25817da624c47c7 [32m204[0m 0.221 ms - 0[0m[39m
+2026-01-26 17:16:53:1653 [35mhttp[39m: [35m[0mOPTIONS /api/complaints/detail/6973ad56f25817da624c47c7 [32m204[0m 0.212 ms - 0[0m[39m
+2026-01-26 17:16:53:1653 [35mhttp[39m: [35m[0mGET /api/complaints/detail/6973ad56f25817da624c47c7 [32m200[0m 14.524 ms - 651[0m[39m
+2026-01-26 17:16:53:1653 [35mhttp[39m: [35m[0mGET /api/complaints/detail/6973ad56f25817da624c47c7 [36m304[0m 13.437 ms - -[0m[39m
+2026-01-26 17:16:55:1655 [35mhttp[39m: [35m[0mOPTIONS /api/complaints/user/6973ad55f25817da624c4796 [32m204[0m 0.683 ms - 0[0m[39m
+2026-01-26 17:16:55:1655 [35mhttp[39m: [35m[0mOPTIONS /api/complaints/user/6973ad55f25817da624c4796 [32m204[0m 0.492 ms - 0[0m[39m
+2026-01-26 17:16:55:1655 [35mhttp[39m: [35m[0mGET /api/complaints/user/6973ad55f25817da624c4796 [36m304[0m 29.498 ms - -[0m[39m
+2026-01-26 17:16:55:1655 [35mhttp[39m: [35m[0mGET /api/complaints/user/6973ad55f25817da624c4796 [36m304[0m 16.653 ms - -[0m[39m
+2026-01-26 17:16:57:1657 [35mhttp[39m: [35m[0mGET /api/complaints/detail/6973ad56f25817da624c47c7 [36m304[0m 18.072 ms - -[0m[39m
+2026-01-26 17:16:57:1657 [35mhttp[39m: [35m[0mGET /api/complaints/detail/6973ad56f25817da624c47c7 [36m304[0m 6.983 ms - -[0m[39m
+2026-01-26 17:16:59:1659 [35mhttp[39m: [35m[0mGET /api/complaints/user/6973ad55f25817da624c4796 [36m304[0m 19.724 ms - -[0m[39m
+2026-01-26 17:16:59:1659 [35mhttp[39m: [35m[0mGET /api/complaints/user/6973ad55f25817da624c4796 [36m304[0m 20.610 ms - -[0m[39m
+2026-01-26 17:17:05:175 [35mhttp[39m: [35m[0mOPTIONS /api/auth/logout [32m204[0m 0.110 ms - 0[0m[39m
+2026-01-26 17:17:05:175 [35mhttp[39m: [35m[0mGET /api/auth/logout [36m304[0m 0.369 ms - -[0m[39m
+2026-01-26 17:29:17:2917 [35mhttp[39m: [35m[0mOPTIONS /api/auth/register [32m204[0m 0.339 ms - 0[0m[39m
+2026-01-26 17:29:17:2917 [35mhttp[39m: [35m[0mPOST /api/auth/register [32m201[0m 120.025 ms - 441[0m[39m
+2026-01-26 17:29:17:2917 [35mhttp[39m: [35m[0mOPTIONS /api/complaints/user/697757158868e88ea1daa664 [32m204[0m 0.205 ms - 0[0m[39m
+2026-01-26 17:29:17:2917 [35mhttp[39m: [35m[0mOPTIONS /api/complaints/user/697757158868e88ea1daa664 [32m204[0m 0.194 ms - 0[0m[39m
+2026-01-26 17:29:17:2917 [35mhttp[39m: [35m[0mGET /api/complaints/user/697757158868e88ea1daa664 [32m200[0m 12.171 ms - 102[0m[39m
+2026-01-26 17:29:17:2917 [35mhttp[39m: [35m[0mGET /api/complaints/user/697757158868e88ea1daa664 [36m304[0m 8.633 ms - -[0m[39m
+2026-01-26 17:30:53:3053 [35mhttp[39m: [35m[0mOPTIONS /api/complaints/user/697757158868e88ea1daa664 [32m204[0m 0.124 ms - 0[0m[39m
+2026-01-26 17:30:53:3053 [35mhttp[39m: [35m[0mGET /api/complaints/user/697757158868e88ea1daa664 [36m304[0m 7.004 ms - -[0m[39m
+2026-01-26 17:33:28:3328 [35mhttp[39m: [35m[0mOPTIONS /api/auth/logout [32m204[0m 0.102 ms - 0[0m[39m
+2026-01-26 17:33:28:3328 [35mhttp[39m: [35m[0mGET /api/auth/logout [36m304[0m 0.276 ms - -[0m[39m
+2026-01-26 17:33:48:3348 [35mhttp[39m: [35m[0mOPTIONS /api/auth/admin-login [32m204[0m 0.282 ms - 0[0m[39m
+2026-01-26 17:33:48:3348 [35mhttp[39m: [35m[0mPOST /api/auth/admin-login [32m200[0m 98.817 ms - 480[0m[39m
+2026-01-26 17:33:48:3348 [35mhttp[39m: [35m[0mOPTIONS /api/admin/complaints/department/WASTE_MANAGEMENT [32m204[0m 0.284 ms - 0[0m[39m
+2026-01-26 17:33:48:3348 [35mhttp[39m: [35m[0mOPTIONS /api/admin/complaints/department/WASTE_MANAGEMENT [32m204[0m 0.164 ms - 0[0m[39m
+2026-01-26 17:33:48:3348 [35mhttp[39m: [35m[0mGET /api/admin/complaints/department/WASTE_MANAGEMENT [32m200[0m 70.221 ms - 2897864[0m[39m
+2026-01-26 17:33:48:3348 [35mhttp[39m: [35m[0mOPTIONS /api/setup/teams/by-category/WASTE_MANAGEMENT [32m204[0m 0.203 ms - 0[0m[39m
+2026-01-26 17:33:48:3348 [35mhttp[39m: [35m[0mGET /api/admin/complaints/department/WASTE_MANAGEMENT [36m304[0m 62.372 ms - -[0m[39m
+2026-01-26 17:33:48:3348 [35mhttp[39m: [35m[0mGET /api/setup/teams/by-category/WASTE_MANAGEMENT [36m304[0m 7.937 ms - -[0m[39m
+2026-01-26 17:33:48:3348 [35mhttp[39m: [35m[0mOPTIONS /api/setup/ward-offices [32m204[0m 0.838 ms - 0[0m[39m
+2026-01-26 17:33:48:3348 [35mhttp[39m: [35m[0mGET /api/setup/teams/by-category/WASTE_MANAGEMENT [36m304[0m 7.877 ms - -[0m[39m
+2026-01-26 17:33:48:3348 [35mhttp[39m: [35m[0mGET /api/setup/ward-offices [36m304[0m 10.430 ms - -[0m[39m
+2026-01-26 17:33:48:3348 [35mhttp[39m: [35m[0mGET /api/setup/ward-offices [36m304[0m 5.728 ms - -[0m[39m
+2026-01-26 17:38:10:3810 [35mhttp[39m: [35m[0mOPTIONS /api/admin/complaints/department/WASTE_MANAGEMENT [32m204[0m 0.231 ms - 0[0m[39m
+2026-01-26 17:38:10:3810 [35mhttp[39m: [35m[0mGET /api/admin/complaints/department/WASTE_MANAGEMENT [36m304[0m 75.782 ms - -[0m[39m
+2026-01-26 17:38:10:3810 [35mhttp[39m: [35m[0mOPTIONS /api/setup/teams/by-category/WASTE_MANAGEMENT [32m204[0m 0.226 ms - 0[0m[39m
+2026-01-26 17:38:10:3810 [35mhttp[39m: [35m[0mGET /api/setup/teams/by-category/WASTE_MANAGEMENT [36m304[0m 6.303 ms - -[0m[39m
+2026-01-26 17:38:10:3810 [35mhttp[39m: [35m[0mOPTIONS /api/setup/ward-offices [32m204[0m 0.212 ms - 0[0m[39m
+2026-01-26 17:38:10:3810 [35mhttp[39m: [35m[0mGET /api/setup/ward-offices [36m304[0m 9.215 ms - -[0m[39m
+2026-01-26 17:38:15:3815 [35mhttp[39m: [35m[0mGET /api/admin/complaints/department/WASTE_MANAGEMENT [36m304[0m 85.210 ms - -[0m[39m
+2026-01-26 17:38:15:3815 [35mhttp[39m: [35m[0mGET /api/admin/complaints/department/WASTE_MANAGEMENT [36m304[0m 101.727 ms - -[0m[39m
+2026-01-26 17:38:15:3815 [35mhttp[39m: [35m[0mGET /api/setup/teams/by-category/WASTE_MANAGEMENT [36m304[0m 6.250 ms - -[0m[39m
+2026-01-26 17:38:15:3815 [35mhttp[39m: [35m[0mGET /api/setup/ward-offices [36m304[0m 10.059 ms - -[0m[39m
+2026-01-26 17:38:15:3815 [35mhttp[39m: [35m[0mGET /api/setup/teams/by-category/WASTE_MANAGEMENT [36m304[0m 10.234 ms - -[0m[39m
+2026-01-26 17:38:15:3815 [35mhttp[39m: [35m[0mGET /api/setup/ward-offices [36m304[0m 8.300 ms - -[0m[39m
+2026-01-26 17:39:19:3919 [35mhttp[39m: [35m[0mOPTIONS /api/admin/complaints/department/WASTE_MANAGEMENT [32m204[0m 0.344 ms - 0[0m[39m
+2026-01-26 17:39:19:3919 [35mhttp[39m: [35m[0mGET /api/admin/complaints/department/WASTE_MANAGEMENT [36m304[0m 68.759 ms - -[0m[39m
+2026-01-26 17:39:19:3919 [35mhttp[39m: [35m[0mGET /api/admin/complaints/department/WASTE_MANAGEMENT [36m304[0m 77.464 ms - -[0m[39m
+2026-01-26 17:39:19:3919 [35mhttp[39m: [35m[0mOPTIONS /api/setup/teams/by-category/WASTE_MANAGEMENT [32m204[0m 0.518 ms - 0[0m[39m
+2026-01-26 17:39:19:3919 [35mhttp[39m: [35m[0mGET /api/setup/teams/by-category/WASTE_MANAGEMENT [36m304[0m 6.848 ms - -[0m[39m
+2026-01-26 17:39:19:3919 [35mhttp[39m: [35m[0mOPTIONS /api/setup/ward-offices [32m204[0m 0.165 ms - 0[0m[39m
+2026-01-26 17:39:19:3919 [35mhttp[39m: [35m[0mGET /api/setup/teams/by-category/WASTE_MANAGEMENT [36m304[0m 11.568 ms - -[0m[39m
+2026-01-26 17:39:19:3919 [35mhttp[39m: [35m[0mGET /api/setup/ward-offices [36m304[0m 13.570 ms - -[0m[39m
+2026-01-26 17:39:19:3919 [35mhttp[39m: [35m[0mGET /api/setup/ward-offices [36m304[0m 8.663 ms - -[0m[39m
+2026-01-26 17:54:46:5446 [32minfo[39m: [32mMongoDB Connected: localhost[39m
+2026-01-26 17:54:46:5446 [32minfo[39m: [32mServer running on port 5000[39m
+2026-01-26 17:54:46:5446 [32minfo[39m: [32mEnvironment: development[39m
+2026-01-26 17:55:05:555 [32minfo[39m: [32mMongoDB Connected: localhost[39m
+2026-01-26 17:55:24:5524 [32minfo[39m: [32mMongoDB Connected: localhost[39m
+2026-01-26 17:55:24:5524 [32minfo[39m: [32mServer running on port 5000[39m
+2026-01-26 17:55:24:5524 [32minfo[39m: [32mEnvironment: development[39m
+2026-01-26 17:55:49:5549 [32minfo[39m: [32mMongoDB Connected: localhost[39m
+2026-01-26 17:56:02:562 [32minfo[39m: [32mMongoDB Connected: localhost[39m
+2026-01-26 17:56:02:562 [32minfo[39m: [32mServer running on port 5000[39m
+2026-01-26 17:56:02:562 [32minfo[39m: [32mEnvironment: development[39m
+2026-01-26 17:56:18:5618 [32minfo[39m: [32mMongoDB Connected: localhost[39m
+2026-01-26 17:56:32:5632 [32minfo[39m: [32mMongoDB Connected: localhost[39m
+2026-01-26 17:56:32:5632 [32minfo[39m: [32mServer running on port 5000[39m
+2026-01-26 17:56:32:5632 [32minfo[39m: [32mEnvironment: development[39m
+2026-01-26 17:56:43:5643 [32minfo[39m: [32mMongoDB Connected: localhost[39m
+2026-01-26 17:56:55:5655 [32minfo[39m: [32mMongoDB Connected: localhost[39m
+2026-01-26 17:56:55:5655 [32minfo[39m: [32mServer running on port 5000[39m
+2026-01-26 17:56:55:5655 [32minfo[39m: [32mEnvironment: development[39m
+2026-01-26 17:57:08:578 [32minfo[39m: [32mMongoDB Connected: localhost[39m
+2026-01-26 17:57:49:5749 [32minfo[39m: [32mMongoDB Connected: localhost[39m
+2026-01-26 17:57:49:5749 [32minfo[39m: [32mServer running on port 5000[39m
+2026-01-26 17:57:49:5749 [32minfo[39m: [32mEnvironment: development[39m
+2026-01-26 17:58:13:5813 [35mhttp[39m: [35m[0mOPTIONS /api/admin/complaints/department/WASTE_MANAGEMENT [32m204[0m 4.276 ms - 0[0m[39m
+2026-01-26 17:58:13:5813 [35mhttp[39m: [35m[0mOPTIONS /api/admin/complaints/department/WASTE_MANAGEMENT [32m204[0m 0.251 ms - 0[0m[39m
+2026-01-26 17:58:13:5813 [35mhttp[39m: [35m[0mGET /api/admin/complaints/department/WASTE_MANAGEMENT [36m304[0m 147.368 ms - -[0m[39m
+2026-01-26 17:58:13:5813 [35mhttp[39m: [35m[0mOPTIONS /api/setup/teams/by-category/WASTE_MANAGEMENT [32m204[0m 0.213 ms - 0[0m[39m
+2026-01-26 17:58:13:5813 [35mhttp[39m: [35m[0mGET /api/admin/complaints/department/WASTE_MANAGEMENT [36m304[0m 91.059 ms - -[0m[39m
+2026-01-26 17:58:13:5813 [35mhttp[39m: [35m[0mGET /api/setup/teams/by-category/WASTE_MANAGEMENT [32m200[0m 13.951 ms - 325[0m[39m
+2026-01-26 17:58:13:5813 [35mhttp[39m: [35m[0mOPTIONS /api/setup/ward-offices [32m204[0m 0.127 ms - 0[0m[39m
+2026-01-26 17:58:13:5813 [35mhttp[39m: [35m[0mGET /api/setup/teams/by-category/WASTE_MANAGEMENT [36m304[0m 8.982 ms - -[0m[39m
+2026-01-26 17:58:13:5813 [35mhttp[39m: [35m[0mGET /api/setup/ward-offices [36m304[0m 13.320 ms - -[0m[39m
+2026-01-26 17:58:13:5813 [35mhttp[39m: [35m[0mGET /api/setup/ward-offices [36m304[0m 8.981 ms - -[0m[39m
+2026-01-26 17:58:38:5838 [35mhttp[39m: [35m[0mOPTIONS /api/admin/complaints/department/WASTE_MANAGEMENT [32m204[0m 0.465 ms - 0[0m[39m
+2026-01-26 17:58:38:5838 [35mhttp[39m: [35m[0mOPTIONS /api/admin/complaints/department/WASTE_MANAGEMENT [32m204[0m 0.244 ms - 0[0m[39m
+2026-01-26 17:58:39:5839 [35mhttp[39m: [35m[0mOPTIONS /api/setup/teams/by-category/WASTE_MANAGEMENT [32m204[0m 0.758 ms - 0[0m[39m
+2026-01-26 17:58:39:5839 [35mhttp[39m: [35m[0mGET /api/setup/teams/by-category/WASTE_MANAGEMENT [36m304[0m 7.535 ms - -[0m[39m
+2026-01-26 17:58:39:5839 [35mhttp[39m: [35m[0mOPTIONS /api/setup/ward-offices [32m204[0m 0.318 ms - 0[0m[39m
+2026-01-26 17:58:39:5839 [35mhttp[39m: [35m[0mGET /api/setup/teams/by-category/WASTE_MANAGEMENT [36m304[0m 17.269 ms - -[0m[39m
+2026-01-26 17:58:39:5839 [35mhttp[39m: [35m[0mGET /api/setup/ward-offices [36m304[0m 17.895 ms - -[0m[39m
+2026-01-26 17:58:39:5839 [35mhttp[39m: [35m[0mGET /api/setup/ward-offices [36m304[0m 14.415 ms - -[0m[39m
+2026-01-26 17:58:41:5841 [35mhttp[39m: [35m[0mOPTIONS /api/auth/logout [32m204[0m 0.121 ms - 0[0m[39m
+2026-01-26 17:58:41:5841 [35mhttp[39m: [35m[0mGET /api/auth/logout [36m304[0m 0.460 ms - -[0m[39m
+2026-01-26 17:58:49:5849 [35mhttp[39m: [35m[0mOPTIONS /api/auth/login [32m204[0m 0.882 ms - 0[0m[39m
+2026-01-26 17:58:49:5849 [35mhttp[39m: [35m[0mPOST /api/auth/login [32m200[0m 146.599 ms - 441[0m[39m
+2026-01-26 17:58:49:5849 [35mhttp[39m: [35m[0mOPTIONS /api/complaints/user/697757158868e88ea1daa664 [32m204[0m 6.076 ms - 0[0m[39m
+2026-01-26 17:58:49:5849 [35mhttp[39m: [35m[0mOPTIONS /api/complaints/user/697757158868e88ea1daa664 [32m204[0m 0.267 ms - 0[0m[39m
+2026-01-26 17:58:49:5849 [35mhttp[39m: [35m[0mGET /api/complaints/user/697757158868e88ea1daa664 [36m304[0m 9.465 ms - -[0m[39m
+2026-01-26 17:58:49:5849 [35mhttp[39m: [35m[0mGET /api/complaints/user/697757158868e88ea1daa664 [36m304[0m 8.809 ms - -[0m[39m
+2026-01-26 18:04:58:458 [35mhttp[39m: [35m[0mOPTIONS /api/complaints [32m204[0m 0.125 ms - 0[0m[39m
+2026-01-26 18:04:58:458 [35mhttp[39m: [35m[0mPOST /api/complaints [32m201[0m 30.426 ms - 54645[0m[39m
+2026-01-26 18:05:00:50 [35mhttp[39m: [35m[0mOPTIONS /api/complaints/user/697757158868e88ea1daa664 [32m204[0m 0.275 ms - 0[0m[39m
+2026-01-26 18:05:00:50 [35mhttp[39m: [35m[0mGET /api/complaints/user/697757158868e88ea1daa664 [32m200[0m 25.067 ms - 54718[0m[39m
+2026-01-26 18:05:00:50 [35mhttp[39m: [35m[0mGET /api/complaints/user/697757158868e88ea1daa664 [36m304[0m 19.413 ms - -[0m[39m
+2026-01-26 18:05:04:54 [35mhttp[39m: [35m[0mOPTIONS /api/complaints/detail/69775f72d2010e5ac9dd376b [32m204[0m 0.308 ms - 0[0m[39m
+2026-01-26 18:05:04:54 [35mhttp[39m: [35m[0mGET /api/complaints/detail/69775f72d2010e5ac9dd376b [32m200[0m 17.598 ms - 54645[0m[39m
+2026-01-26 18:05:04:54 [35mhttp[39m: [35m[0mGET /api/complaints/detail/69775f72d2010e5ac9dd376b [36m304[0m 7.464 ms - -[0m[39m
+2026-01-26 18:05:21:521 [35mhttp[39m: [35m[0mOPTIONS /api/auth/logout [32m204[0m 0.112 ms - 0[0m[39m
+2026-01-26 18:05:21:521 [35mhttp[39m: [35m[0mGET /api/auth/logout [36m304[0m 0.381 ms - -[0m[39m
+2026-01-26 18:05:36:536 [35mhttp[39m: [35m[0mOPTIONS /api/auth/admin-login [32m204[0m 0.166 ms - 0[0m[39m
+2026-01-26 18:05:36:536 [31merror[39m: [31m401 - Invalid email or password - /api/auth/admin-login - POST - ::1[39m
+2026-01-26 18:05:36:536 [31merror[39m: [31mError: Invalid email or password[39m
+[31m    at file:///E:/01.%20My%20Data/CivicCare_Smart_City/backend/src/controllers/authController.js:83:17[39m
+2026-01-26 18:05:36:536 [35mhttp[39m: [35m[0mPOST /api/auth/admin-login [33m401[0m 103.846 ms - 55[0m[39m
+2026-01-26 18:05:50:550 [35mhttp[39m: [35m[0mOPTIONS /api/auth/admin-login [32m204[0m 0.119 ms - 0[0m[39m
+2026-01-26 18:05:50:550 [31merror[39m: [31m401 - Invalid email or password - /api/auth/admin-login - POST - ::1[39m
+2026-01-26 18:05:50:550 [31merror[39m: [31mError: Invalid email or password[39m
+[31m    at file:///E:/01.%20My%20Data/CivicCare_Smart_City/backend/src/controllers/authController.js:83:17[39m
+2026-01-26 18:05:50:550 [35mhttp[39m: [35m[0mPOST /api/auth/admin-login [33m401[0m 98.676 ms - 55[0m[39m
+2026-01-26 18:06:11:611 [35mhttp[39m: [35m[0mOPTIONS /api/auth/admin-login [32m204[0m 0.175 ms - 0[0m[39m
+2026-01-26 18:06:11:611 [35mhttp[39m: [35m[0mPOST /api/auth/admin-login [32m200[0m 98.029 ms - 480[0m[39m
+2026-01-26 18:06:11:611 [35mhttp[39m: [35m[0mOPTIONS /api/admin/complaints/department/WASTE_MANAGEMENT [32m204[0m 0.378 ms - 0[0m[39m
+2026-01-26 18:06:11:611 [35mhttp[39m: [35m[0mOPTIONS /api/admin/complaints/department/WASTE_MANAGEMENT [32m204[0m 0.232 ms - 0[0m[39m
+2026-01-26 18:06:12:612 [35mhttp[39m: [35m[0mGET /api/admin/complaints/department/WASTE_MANAGEMENT [36m304[0m 69.923 ms - -[0m[39m
+2026-01-26 18:06:12:612 [35mhttp[39m: [35m[0mOPTIONS /api/setup/teams/by-category/WASTE_MANAGEMENT [32m204[0m 0.256 ms - 0[0m[39m
+2026-01-26 18:06:12:612 [35mhttp[39m: [35m[0mGET /api/admin/complaints/department/WASTE_MANAGEMENT [36m304[0m 62.109 ms - -[0m[39m
+2026-01-26 18:06:12:612 [35mhttp[39m: [35m[0mGET /api/setup/teams/by-category/WASTE_MANAGEMENT [36m304[0m 7.862 ms - -[0m[39m
+2026-01-26 18:06:12:612 [35mhttp[39m: [35m[0mOPTIONS /api/setup/ward-offices [32m204[0m 0.101 ms - 0[0m[39m
+2026-01-26 18:06:12:612 [35mhttp[39m: [35m[0mGET /api/setup/teams/by-category/WASTE_MANAGEMENT [36m304[0m 7.176 ms - -[0m[39m
+2026-01-26 18:06:12:612 [35mhttp[39m: [35m[0mGET /api/setup/ward-offices [36m304[0m 10.764 ms - -[0m[39m
+2026-01-26 18:06:12:612 [35mhttp[39m: [35m[0mGET /api/setup/ward-offices [36m304[0m 5.600 ms - -[0m[39m
+2026-01-26 18:09:36:936 [31merror[39m: [31m400 - Category is required - /api/complaints - POST - ::ffff:127.0.0.1[39m
+2026-01-26 18:09:36:936 [31merror[39m: [31mError: Category is required[39m
+[31m    at validate (E:\01. My Data\CivicCare_Smart_City\backend\src\middleware\validation.js:8:17)[39m
+[31m    at Layer.handle [as handle_request] (E:\01. My Data\CivicCare_Smart_City\backend\node_modules\express\lib\router\layer.js:95:5)[39m
+[31m    at next (E:\01. My Data\CivicCare_Smart_City\backend\node_modules\express\lib\router\route.js:149:13)[39m
+[31m    at middleware (E:\01. My Data\CivicCare_Smart_City\backend\node_modules\express-validator\lib\middlewares\check.js:16:13)[39m
+[31m    at processTicksAndRejections (node:internal/process/task_queues:105:5)[39m
+2026-01-26 18:11:32:1132 [32minfo[39m: [32mMongoDB Connected: localhost[39m
+2026-01-26 18:11:32:1132 [32minfo[39m: [32mServer running on port 5000[39m
+2026-01-26 18:11:32:1132 [32minfo[39m: [32mEnvironment: development[39m
+2026-01-26 18:11:50:1150 [32minfo[39m: [32mMongoDB Connected: localhost[39m
+2026-01-26 18:11:51:1151 [35mhttp[39m: [35m[0mPOST /api/auth/login [32m200[0m 170.055 ms - 465[0m[39m
+2026-01-26 18:11:51:1151 [35mhttp[39m: [35m[0mPOST /api/complaints [32m201[0m 30.337 ms - 741[0m[39m
+2026-01-26 18:11:51:1151 [35mhttp[39m: [35m[0mGET /api/complaints/user/6977610e4b21a2ba93fe0824 [32m200[0m 18.012 ms - 814[0m[39m
+2026-01-26 18:12:39:1239 [32minfo[39m: [32mMongoDB Connected: localhost[39m
+2026-01-26 18:12:39:1239 [32minfo[39m: [32mServer running on port 5000[39m
+2026-01-26 18:12:39:1239 [32minfo[39m: [32mEnvironment: development[39m
+2026-01-26 18:12:50:1250 [32minfo[39m: [32mMongoDB Connected: localhost[39m
+2026-01-26 18:12:50:1250 [32minfo[39m: [32mServer running on port 5000[39m
+2026-01-26 18:12:50:1250 [32minfo[39m: [32mEnvironment: development[39m
+2026-01-26 18:13:05:135 [32minfo[39m: [32mMongoDB Connected: localhost[39m
+2026-01-26 18:13:05:135 [32minfo[39m: [32mServer running on port 5000[39m
+2026-01-26 18:13:05:135 [32minfo[39m: [32mEnvironment: development[39m
+2026-01-26 18:13:38:1338 [32minfo[39m: [32mMongoDB Connected: localhost[39m
+2026-01-26 18:13:38:1338 [32minfo[39m: [32mServer running on port 5000[39m
+2026-01-26 18:13:38:1338 [32minfo[39m: [32mEnvironment: development[39m
+2026-01-26 18:14:20:1420 [35mhttp[39m: [35m[0mOPTIONS /api/admin/complaints/department/WASTE_MANAGEMENT [32m204[0m 1.522 ms - 0[0m[39m
+2026-01-26 18:14:20:1420 [35mhttp[39m: [35m[0mOPTIONS /api/admin/complaints/department/WASTE_MANAGEMENT [32m204[0m 0.422 ms - 0[0m[39m
+2026-01-26 18:14:20:1420 [35mhttp[39m: [35m[0mGET /api/admin/complaints/department/WASTE_MANAGEMENT [32m200[0m 168.358 ms - 2898577[0m[39m
+2026-01-26 18:14:20:1420 [35mhttp[39m: [35m[0mOPTIONS /api/setup/teams/by-category/WASTE_MANAGEMENT [32m204[0m 0.667 ms - 0[0m[39m
+2026-01-26 18:14:20:1420 [35mhttp[39m: [35m[0mGET /api/admin/complaints/department/WASTE_MANAGEMENT [36m304[0m 104.547 ms - -[0m[39m
+2026-01-26 18:14:20:1420 [35mhttp[39m: [35m[0mGET /api/setup/teams/by-category/WASTE_MANAGEMENT [36m304[0m 10.993 ms - -[0m[39m
+2026-01-26 18:14:20:1420 [35mhttp[39m: [35m[0mOPTIONS /api/setup/ward-offices [32m204[0m 0.230 ms - 0[0m[39m
+2026-01-26 18:14:20:1420 [35mhttp[39m: [35m[0mGET /api/setup/ward-offices [36m304[0m 14.098 ms - -[0m[39m
+2026-01-26 18:14:20:1420 [35mhttp[39m: [35m[0mGET /api/setup/teams/by-category/WASTE_MANAGEMENT [36m304[0m 10.947 ms - -[0m[39m
+2026-01-26 18:14:20:1420 [35mhttp[39m: [35m[0mGET /api/setup/ward-offices [36m304[0m 8.602 ms - -[0m[39m
+2026-01-26 18:14:22:1422 [35mhttp[39m: [35m[0mGET /api/admin/complaints/department/WASTE_MANAGEMENT [36m304[0m 95.160 ms - -[0m[39m
+2026-01-26 18:14:22:1422 [35mhttp[39m: [35m[0mGET /api/admin/complaints/department/WASTE_MANAGEMENT [36m304[0m 101.576 ms - -[0m[39m
+2026-01-26 18:14:22:1422 [35mhttp[39m: [35m[0mGET /api/setup/teams/by-category/WASTE_MANAGEMENT [36m304[0m 51.234 ms - -[0m[39m
+2026-01-26 18:14:22:1422 [35mhttp[39m: [35m[0mGET /api/setup/ward-offices [36m304[0m 7.619 ms - -[0m[39m
+2026-01-26 18:14:22:1422 [35mhttp[39m: [35m[0mGET /api/setup/teams/by-category/WASTE_MANAGEMENT [36m304[0m 7.173 ms - -[0m[39m
+2026-01-26 18:14:22:1422 [35mhttp[39m: [35m[0mGET /api/setup/ward-offices [36m304[0m 9.351 ms - -[0m[39m
+2026-01-26 18:14:24:1424 [35mhttp[39m: [35m[0mOPTIONS /api/auth/logout [32m204[0m 0.168 ms - 0[0m[39m
+2026-01-26 18:14:24:1424 [35mhttp[39m: [35m[0mGET /api/auth/logout [36m304[0m 0.665 ms - -[0m[39m
+2026-01-26 18:14:33:1433 [35mhttp[39m: [35m[0mOPTIONS /api/auth/login [32m204[0m 0.222 ms - 0[0m[39m
+2026-01-26 18:14:33:1433 [35mhttp[39m: [35m[0mPOST /api/auth/login [32m200[0m 176.971 ms - 441[0m[39m
+2026-01-26 18:14:33:1433 [35mhttp[39m: [35m[0mOPTIONS /api/complaints/user/697757158868e88ea1daa664 [32m204[0m 0.703 ms - 0[0m[39m
+2026-01-26 18:14:33:1433 [35mhttp[39m: [35m[0mGET /api/complaints/user/697757158868e88ea1daa664 [36m304[0m 15.299 ms - -[0m[39m
+2026-01-26 18:14:33:1433 [35mhttp[39m: [35m[0mGET /api/complaints/user/697757158868e88ea1daa664 [36m304[0m 15.832 ms - -[0m[39m
+2026-01-26 18:14:36:1436 [35mhttp[39m: [35m[0mOPTIONS /api/complaints/detail/69775f72d2010e5ac9dd376b [32m204[0m 0.426 ms - 0[0m[39m
+2026-01-26 18:14:36:1436 [35mhttp[39m: [35m[0mOPTIONS /api/complaints/detail/69775f72d2010e5ac9dd376b [32m204[0m 1.058 ms - 0[0m[39m
+2026-01-26 18:14:36:1436 [35mhttp[39m: [35m[0mGET /api/complaints/detail/69775f72d2010e5ac9dd376b [36m304[0m 18.006 ms - -[0m[39m
+2026-01-26 18:14:36:1436 [35mhttp[39m: [35m[0mGET /api/complaints/detail/69775f72d2010e5ac9dd376b [36m304[0m 11.821 ms - -[0m[39m
+2026-01-26 18:14:39:1439 [35mhttp[39m: [35m[0mOPTIONS /api/complaints/user/697757158868e88ea1daa664 [32m204[0m 0.223 ms - 0[0m[39m
+2026-01-26 18:14:39:1439 [35mhttp[39m: [35m[0mOPTIONS /api/complaints/user/697757158868e88ea1daa664 [32m204[0m 0.209 ms - 0[0m[39m
+2026-01-26 18:14:39:1439 [35mhttp[39m: [35m[0mGET /api/complaints/user/697757158868e88ea1daa664 [36m304[0m 17.752 ms - -[0m[39m
+2026-01-26 18:14:39:1439 [35mhttp[39m: [35m[0mGET /api/complaints/user/697757158868e88ea1daa664 [36m304[0m 16.053 ms - -[0m[39m
+2026-01-26 18:14:42:1442 [35mhttp[39m: [35m[0mOPTIONS /api/auth/logout [32m204[0m 0.153 ms - 0[0m[39m
+2026-01-26 18:14:42:1442 [35mhttp[39m: [35m[0mGET /api/auth/logout [36m304[0m 0.541 ms - -[0m[39m
+2026-01-26 18:14:52:1452 [35mhttp[39m: [35m[0mOPTIONS /api/auth/admin-login [32m204[0m 0.225 ms - 0[0m[39m
+2026-01-26 18:14:52:1452 [35mhttp[39m: [35m[0mPOST /api/auth/admin-login [32m200[0m 115.570 ms - 480[0m[39m
+2026-01-26 18:14:52:1452 [35mhttp[39m: [35m[0mOPTIONS /api/admin/complaints/department/WASTE_MANAGEMENT [32m204[0m 0.161 ms - 0[0m[39m
+2026-01-26 18:14:52:1452 [35mhttp[39m: [35m[0mGET /api/admin/complaints/department/WASTE_MANAGEMENT [36m304[0m 105.823 ms - -[0m[39m
+2026-01-26 18:14:52:1452 [35mhttp[39m: [35m[0mOPTIONS /api/setup/teams/by-category/WASTE_MANAGEMENT [32m204[0m 0.172 ms - 0[0m[39m
+2026-01-26 18:14:52:1452 [35mhttp[39m: [35m[0mGET /api/admin/complaints/department/WASTE_MANAGEMENT [36m304[0m 92.759 ms - -[0m[39m
+2026-01-26 18:14:52:1452 [35mhttp[39m: [35m[0mGET /api/setup/teams/by-category/WASTE_MANAGEMENT [36m304[0m 10.560 ms - -[0m[39m
+2026-01-26 18:14:52:1452 [35mhttp[39m: [35m[0mOPTIONS /api/setup/ward-offices [32m204[0m 0.176 ms - 0[0m[39m
+2026-01-26 18:14:52:1452 [35mhttp[39m: [35m[0mGET /api/setup/ward-offices [36m304[0m 9.180 ms - -[0m[39m
+2026-01-26 18:14:52:1452 [35mhttp[39m: [35m[0mGET /api/setup/teams/by-category/WASTE_MANAGEMENT [36m304[0m 7.148 ms - -[0m[39m
+2026-01-26 18:14:52:1452 [35mhttp[39m: [35m[0mGET /api/setup/ward-offices [36m304[0m 10.538 ms - -[0m[39m
+2026-01-26 18:15:37:1537 [35mhttp[39m: [35m[0mOPTIONS /api/admin/complaints/department/WASTE_MANAGEMENT [32m204[0m 0.205 ms - 0[0m[39m
+2026-01-26 18:15:37:1537 [35mhttp[39m: [35m[0mOPTIONS /api/admin/complaints/department/WASTE_MANAGEMENT [32m204[0m 0.159 ms - 0[0m[39m
+2026-01-26 18:15:37:1537 [35mhttp[39m: [35m[0mGET /api/admin/complaints/department/WASTE_MANAGEMENT [36m304[0m 89.307 ms - -[0m[39m
+2026-01-26 18:15:37:1537 [35mhttp[39m: [35m[0mOPTIONS /api/setup/teams/by-category/WASTE_MANAGEMENT [32m204[0m 0.151 ms - 0[0m[39m
+2026-01-26 18:15:37:1537 [35mhttp[39m: [35m[0mGET /api/admin/complaints/department/WASTE_MANAGEMENT [36m304[0m 88.574 ms - -[0m[39m
+2026-01-26 18:15:37:1537 [35mhttp[39m: [35m[0mGET /api/setup/teams/by-category/WASTE_MANAGEMENT [36m304[0m 9.653 ms - -[0m[39m
+2026-01-26 18:15:37:1537 [35mhttp[39m: [35m[0mOPTIONS /api/setup/ward-offices [32m204[0m 0.147 ms - 0[0m[39m
+2026-01-26 18:15:37:1537 [35mhttp[39m: [35m[0mGET /api/setup/ward-offices [36m304[0m 9.133 ms - -[0m[39m
+2026-01-26 18:15:37:1537 [35mhttp[39m: [35m[0mGET /api/setup/teams/by-category/WASTE_MANAGEMENT [36m304[0m 7.843 ms - -[0m[39m
+2026-01-26 18:15:37:1537 [35mhttp[39m: [35m[0mGET /api/setup/ward-offices [36m304[0m 6.234 ms - -[0m[39m
+2026-01-26 18:15:42:1542 [35mhttp[39m: [35m[0mOPTIONS /api/auth/logout [32m204[0m 0.200 ms - 0[0m[39m
+2026-01-26 18:15:42:1542 [35mhttp[39m: [35m[0mGET /api/auth/logout [36m304[0m 0.544 ms - -[0m[39m
+2026-01-26 18:15:54:1554 [35mhttp[39m: [35m[0mOPTIONS /api/auth/login [32m204[0m 0.197 ms - 0[0m[39m
+2026-01-26 18:15:54:1554 [35mhttp[39m: [35m[0mPOST /api/auth/login [32m200[0m 119.003 ms - 441[0m[39m
+2026-01-26 18:15:54:1554 [35mhttp[39m: [35m[0mOPTIONS /api/complaints/user/697757158868e88ea1daa664 [32m204[0m 0.202 ms - 0[0m[39m
+2026-01-26 18:15:54:1554 [35mhttp[39m: [35m[0mGET /api/complaints/user/697757158868e88ea1daa664 [36m304[0m 12.593 ms - -[0m[39m
+2026-01-26 18:15:54:1554 [35mhttp[39m: [35m[0mGET /api/complaints/user/697757158868e88ea1daa664 [36m304[0m 25.013 ms - -[0m[39m
+2026-01-26 18:18:03:183 [35mhttp[39m: [35m[0mOPTIONS /api/auth/logout [32m204[0m 0.142 ms - 0[0m[39m
+2026-01-26 18:18:03:183 [35mhttp[39m: [35m[0mGET /api/auth/logout [36m304[0m 0.413 ms - -[0m[39m
+2026-01-26 18:18:13:1813 [35mhttp[39m: [35m[0mOPTIONS /api/auth/admin-login [32m204[0m 0.225 ms - 0[0m[39m
+2026-01-26 18:18:13:1813 [35mhttp[39m: [35m[0mPOST /api/auth/admin-login [32m200[0m 115.049 ms - 480[0m[39m
+2026-01-26 18:18:13:1813 [35mhttp[39m: [35m[0mOPTIONS /api/admin/complaints/department/WASTE_MANAGEMENT [32m204[0m 0.154 ms - 0[0m[39m
+2026-01-26 18:18:13:1813 [35mhttp[39m: [35m[0mOPTIONS /api/admin/complaints/department/WASTE_MANAGEMENT [32m204[0m 0.214 ms - 0[0m[39m
+2026-01-26 18:18:13:1813 [35mhttp[39m: [35m[0mGET /api/admin/complaints/department/WASTE_MANAGEMENT [36m304[0m 88.372 ms - -[0m[39m
+2026-01-26 18:18:13:1813 [35mhttp[39m: [35m[0mOPTIONS /api/setup/teams/by-category/WASTE_MANAGEMENT [32m204[0m 0.247 ms - 0[0m[39m
+2026-01-26 18:18:13:1813 [35mhttp[39m: [35m[0mGET /api/admin/complaints/department/WASTE_MANAGEMENT [36m304[0m 94.397 ms - -[0m[39m
+2026-01-26 18:18:13:1813 [35mhttp[39m: [35m[0mGET /api/setup/teams/by-category/WASTE_MANAGEMENT [36m304[0m 9.568 ms - -[0m[39m
+2026-01-26 18:18:13:1813 [35mhttp[39m: [35m[0mOPTIONS /api/setup/ward-offices [32m204[0m 0.171 ms - 0[0m[39m
+2026-01-26 18:18:13:1813 [35mhttp[39m: [35m[0mGET /api/setup/teams/by-category/WASTE_MANAGEMENT [36m304[0m 7.198 ms - -[0m[39m
+2026-01-26 18:18:13:1813 [35mhttp[39m: [35m[0mGET /api/setup/ward-offices [36m304[0m 8.102 ms - -[0m[39m
+2026-01-26 18:18:13:1813 [35mhttp[39m: [35m[0mGET /api/setup/ward-offices [36m304[0m 5.792 ms - -[0m[39m
+2026-01-26 18:21:49:2149 [35mhttp[39m: [35m[0mOPTIONS /api/admin/complaints/department/WASTE_MANAGEMENT [32m204[0m 0.229 ms - 0[0m[39m
+2026-01-26 18:21:49:2149 [35mhttp[39m: [35m[0mOPTIONS /api/admin/complaints/department/WASTE_MANAGEMENT [32m204[0m 0.173 ms - 0[0m[39m
+2026-01-26 18:21:50:2150 [35mhttp[39m: [35m[0mGET /api/admin/complaints/department/WASTE_MANAGEMENT [36m304[0m 80.631 ms - -[0m[39m
+2026-01-26 18:21:50:2150 [35mhttp[39m: [35m[0mGET /api/admin/complaints/department/WASTE_MANAGEMENT [36m304[0m 88.846 ms - -[0m[39m
+2026-01-26 18:21:50:2150 [35mhttp[39m: [35m[0mOPTIONS /api/setup/teams/by-category/WASTE_MANAGEMENT [32m204[0m 0.178 ms - 0[0m[39m
+2026-01-26 18:21:50:2150 [35mhttp[39m: [35m[0mGET /api/setup/teams/by-category/WASTE_MANAGEMENT [36m304[0m 5.900 ms - -[0m[39m
+2026-01-26 18:21:50:2150 [35mhttp[39m: [35m[0mOPTIONS /api/setup/ward-offices [32m204[0m 0.276 ms - 0[0m[39m
+2026-01-26 18:21:50:2150 [35mhttp[39m: [35m[0mGET /api/setup/ward-offices [36m304[0m 6.094 ms - -[0m[39m
+2026-01-26 18:21:50:2150 [35mhttp[39m: [35m[0mGET /api/setup/teams/by-category/WASTE_MANAGEMENT [36m304[0m 8.075 ms - -[0m[39m
+2026-01-26 18:21:50:2150 [35mhttp[39m: [35m[0mGET /api/setup/ward-offices [36m304[0m 6.141 ms - -[0m[39m
+2026-01-26 18:22:01:221 [35mhttp[39m: [35m[0mOPTIONS /api/admin/complaints/department/WASTE_MANAGEMENT [32m204[0m 0.250 ms - 0[0m[39m
+2026-01-26 18:22:01:221 [35mhttp[39m: [35m[0mGET /api/admin/complaints/department/WASTE_MANAGEMENT [36m304[0m 79.940 ms - -[0m[39m
+2026-01-26 18:22:01:221 [35mhttp[39m: [35m[0mOPTIONS /api/setup/teams/by-category/WASTE_MANAGEMENT [32m204[0m 0.107 ms - 0[0m[39m
+2026-01-26 18:22:01:221 [35mhttp[39m: [35m[0mGET /api/setup/teams/by-category/WASTE_MANAGEMENT [36m304[0m 9.787 ms - -[0m[39m
+2026-01-26 18:22:01:221 [35mhttp[39m: [35m[0mOPTIONS /api/setup/ward-offices [32m204[0m 0.154 ms - 0[0m[39m
+2026-01-26 18:22:01:221 [35mhttp[39m: [35m[0mGET /api/setup/ward-offices [36m304[0m 8.568 ms - -[0m[39m
+2026-01-26 18:22:35:2235 [35mhttp[39m: [35m[0mOPTIONS /api/admin/complaints/department/WASTE_MANAGEMENT [32m204[0m 0.094 ms - 0[0m[39m
+2026-01-26 18:22:35:2235 [35mhttp[39m: [35m[0mGET /api/admin/complaints/department/WASTE_MANAGEMENT [36m304[0m 58.547 ms - -[0m[39m
+2026-01-26 18:22:35:2235 [35mhttp[39m: [35m[0mOPTIONS /api/setup/teams/by-category/WASTE_MANAGEMENT [32m204[0m 0.098 ms - 0[0m[39m
+2026-01-26 18:22:35:2235 [35mhttp[39m: [35m[0mGET /api/setup/teams/by-category/WASTE_MANAGEMENT [36m304[0m 31.946 ms - -[0m[39m
+2026-01-26 18:22:35:2235 [35mhttp[39m: [35m[0mOPTIONS /api/setup/ward-offices [32m204[0m 0.093 ms - 0[0m[39m
+2026-01-26 18:22:35:2235 [35mhttp[39m: [35m[0mGET /api/setup/ward-offices [36m304[0m 6.379 ms - -[0m[39m
+2026-01-26 18:23:28:2328 [35mhttp[39m: [35m[0mOPTIONS /api/admin/complaints/department/WASTE_MANAGEMENT [32m204[0m 0.219 ms - 0[0m[39m
+2026-01-26 18:23:28:2328 [35mhttp[39m: [35m[0mGET /api/admin/complaints/department/WASTE_MANAGEMENT [36m304[0m 66.545 ms - -[0m[39m
+2026-01-26 18:23:28:2328 [35mhttp[39m: [35m[0mOPTIONS /api/setup/teams/by-category/WASTE_MANAGEMENT [32m204[0m 0.164 ms - 0[0m[39m
+2026-01-26 18:29:26:2926 [35mhttp[39m: [35m[0mOPTIONS /api/admin/complaints/department/WASTE_MANAGEMENT [32m204[0m 0.183 ms - 0[0m[39m
+2026-01-26 18:29:26:2926 [35mhttp[39m: [35m[0mOPTIONS /api/admin/complaints/department/WASTE_MANAGEMENT [32m204[0m 0.345 ms - 0[0m[39m
+2026-01-26 18:29:26:2926 [35mhttp[39m: [35m[0mGET /api/admin/complaints/department/WASTE_MANAGEMENT [36m304[0m 103.209 ms - -[0m[39m
+2026-01-26 18:29:26:2926 [35mhttp[39m: [35m[0mOPTIONS /api/setup/teams/by-category/WASTE_MANAGEMENT [32m204[0m 0.136 ms - 0[0m[39m
+2026-01-26 18:29:26:2926 [35mhttp[39m: [35m[0mGET /api/admin/complaints/department/WASTE_MANAGEMENT [36m304[0m 105.506 ms - -[0m[39m
+2026-01-26 18:29:26:2926 [35mhttp[39m: [35m[0mGET /api/setup/teams/by-category/WASTE_MANAGEMENT [32m200[0m 15.718 ms - 325[0m[39m
+2026-01-26 18:29:26:2926 [35mhttp[39m: [35m[0mOPTIONS /api/setup/ward-offices [32m204[0m 0.363 ms - 0[0m[39m
+2026-01-26 18:29:26:2926 [35mhttp[39m: [35m[0mGET /api/setup/teams/by-category/WASTE_MANAGEMENT [36m304[0m 10.079 ms - -[0m[39m
+2026-01-26 18:29:26:2926 [35mhttp[39m: [35m[0mGET /api/setup/ward-offices [36m304[0m 14.987 ms - -[0m[39m
+2026-01-26 18:29:26:2926 [35mhttp[39m: [35m[0mGET /api/setup/ward-offices [36m304[0m 8.367 ms - -[0m[39m
+2026-01-26 18:41:25:4125 [35mhttp[39m: [35m[0mOPTIONS /api/admin/complaints/department/WASTE_MANAGEMENT [32m204[0m 0.398 ms - 0[0m[39m
+2026-01-26 18:41:26:4126 [35mhttp[39m: [35m[0mOPTIONS /api/admin/complaints/department/WASTE_MANAGEMENT [32m204[0m 0.147 ms - 0[0m[39m
+2026-01-26 18:41:26:4126 [35mhttp[39m: [35m[0mGET /api/admin/complaints/department/WASTE_MANAGEMENT [36m304[0m 106.113 ms - -[0m[39m
+2026-01-26 18:41:26:4126 [35mhttp[39m: [35m[0mGET /api/admin/complaints/department/WASTE_MANAGEMENT [36m304[0m 146.060 ms - -[0m[39m
+2026-01-26 18:41:26:4126 [35mhttp[39m: [35m[0mOPTIONS /api/setup/teams/by-category/WASTE_MANAGEMENT [32m204[0m 0.162 ms - 0[0m[39m
+2026-01-26 18:41:26:4126 [35mhttp[39m: [35m[0mGET /api/setup/teams/by-category/WASTE_MANAGEMENT [36m304[0m 56.710 ms - -[0m[39m
+2026-01-26 18:41:28:4128 [35mhttp[39m: [35m[0mOPTIONS /api/setup/ward-offices [32m204[0m 0.147 ms - 0[0m[39m
+2026-01-26 18:41:28:4128 [35mhttp[39m: [35m[0mGET /api/setup/teams/by-category/WASTE_MANAGEMENT [36m304[0m 11.520 ms - -[0m[39m
+2026-01-26 18:41:28:4128 [35mhttp[39m: [35m[0mGET /api/setup/ward-offices [36m304[0m 14.052 ms - -[0m[39m
+2026-01-26 18:41:28:4128 [35mhttp[39m: [35m[0mGET /api/setup/ward-offices [36m304[0m 9.082 ms - -[0m[39m
+2026-01-27 10:53:37:5337 [32minfo[39m: [32mMongoDB Connected: localhost[39m
+2026-01-27 10:53:37:5337 [32minfo[39m: [32mServer running on port 5000[39m
+2026-01-27 10:53:37:5337 [32minfo[39m: [32mEnvironment: development[39m
+2026-01-27 11:11:54:1154 [35mhttp[39m: [35m[0mOPTIONS /api/auth/logout [32m204[0m 1.518 ms - 0[0m[39m
+2026-01-27 11:11:54:1154 [35mhttp[39m: [35m[0mGET /api/auth/logout [32m200[0m 2.887 ms - 52[0m[39m
+2026-01-27 11:16:35:1635 [35mhttp[39m: [35m[0mOPTIONS /api/auth/admin-login [32m204[0m 0.513 ms - 0[0m[39m
+2026-01-27 11:16:35:1635 [35mhttp[39m: [35m[0mPOST /api/auth/admin-login [32m200[0m 334.265 ms - 480[0m[39m
+2026-01-27 11:16:35:1635 [35mhttp[39m: [35m[0mOPTIONS /api/admin/complaints/department/WASTE_MANAGEMENT [32m204[0m 0.381 ms - 0[0m[39m
+2026-01-27 11:16:35:1635 [35mhttp[39m: [35m[0mOPTIONS /api/admin/complaints/department/WASTE_MANAGEMENT [32m204[0m 0.336 ms - 0[0m[39m
+2026-01-27 11:16:35:1635 [35mhttp[39m: [35m[0mGET /api/admin/complaints/department/WASTE_MANAGEMENT [32m200[0m 144.944 ms - 2898577[0m[39m
+2026-01-27 11:16:35:1635 [35mhttp[39m: [35m[0mOPTIONS /api/setup/teams/by-category/WASTE_MANAGEMENT [32m204[0m 0.241 ms - 0[0m[39m
+2026-01-27 11:16:35:1635 [35mhttp[39m: [35m[0mGET /api/setup/teams/by-category/WASTE_MANAGEMENT [32m200[0m 9.700 ms - 325[0m[39m
+2026-01-27 11:16:35:1635 [35mhttp[39m: [35m[0mOPTIONS /api/setup/ward-offices [32m204[0m 0.468 ms - 0[0m[39m
+2026-01-27 11:16:35:1635 [35mhttp[39m: [35m[0mGET /api/admin/complaints/department/WASTE_MANAGEMENT [36m304[0m 119.747 ms - -[0m[39m
+2026-01-27 11:16:36:1636 [35mhttp[39m: [35m[0mGET /api/setup/ward-offices [32m200[0m 35.175 ms - 877[0m[39m
+2026-01-27 11:16:36:1636 [35mhttp[39m: [35m[0mGET /api/setup/teams/by-category/WASTE_MANAGEMENT [36m304[0m 10.304 ms - -[0m[39m
+2026-01-27 11:16:36:1636 [35mhttp[39m: [35m[0mGET /api/setup/ward-offices [36m304[0m 10.481 ms - -[0m[39m
+2026-01-27 11:17:15:1715 [35mhttp[39m: [35m[0mOPTIONS /api/auth/logout [32m204[0m 0.149 ms - 0[0m[39m
+2026-01-27 11:17:15:1715 [35mhttp[39m: [35m[0mGET /api/auth/logout [36m304[0m 0.854 ms - -[0m[39m
+2026-01-27 11:17:28:1728 [35mhttp[39m: [35m[0mOPTIONS /api/auth/login [32m204[0m 0.269 ms - 0[0m[39m
+2026-01-27 11:17:28:1728 [35mhttp[39m: [35m[0mPOST /api/auth/login [32m200[0m 119.638 ms - 441[0m[39m
+2026-01-27 11:17:29:1729 [35mhttp[39m: [35m[0mOPTIONS /api/complaints/user/697757158868e88ea1daa664 [32m204[0m 0.335 ms - 0[0m[39m
+2026-01-27 11:17:29:1729 [35mhttp[39m: [35m[0mOPTIONS /api/complaints/user/697757158868e88ea1daa664 [32m204[0m 0.240 ms - 0[0m[39m
+2026-01-27 11:17:29:1729 [35mhttp[39m: [35m[0mGET /api/complaints/user/697757158868e88ea1daa664 [32m200[0m 22.762 ms - 54718[0m[39m
+2026-01-27 11:17:29:1729 [35mhttp[39m: [35m[0mGET /api/complaints/user/697757158868e88ea1daa664 [36m304[0m 20.111 ms - -[0m[39m
+2026-01-27 11:17:31:1731 [35mhttp[39m: [35m[0mOPTIONS /api/complaints/detail/69775f72d2010e5ac9dd376b [32m204[0m 0.353 ms - 0[0m[39m
+2026-01-27 11:17:31:1731 [35mhttp[39m: [35m[0mOPTIONS /api/complaints/detail/69775f72d2010e5ac9dd376b [32m204[0m 0.180 ms - 0[0m[39m
+2026-01-27 11:17:31:1731 [35mhttp[39m: [35m[0mGET /api/complaints/detail/69775f72d2010e5ac9dd376b [32m200[0m 13.846 ms - 54645[0m[39m
+2026-01-27 11:17:31:1731 [35mhttp[39m: [35m[0mGET /api/complaints/detail/69775f72d2010e5ac9dd376b [36m304[0m 11.583 ms - -[0m[39m
+2026-01-27 11:17:37:1737 [35mhttp[39m: [35m[0mOPTIONS /api/complaints/user/697757158868e88ea1daa664 [32m204[0m 1.187 ms - 0[0m[39m
+2026-01-27 11:17:37:1737 [35mhttp[39m: [35m[0mOPTIONS /api/complaints/user/697757158868e88ea1daa664 [32m204[0m 0.269 ms - 0[0m[39m
+2026-01-27 11:17:37:1737 [35mhttp[39m: [35m[0mGET /api/complaints/user/697757158868e88ea1daa664 [36m304[0m 18.724 ms - -[0m[39m
+2026-01-27 11:17:37:1737 [35mhttp[39m: [35m[0mGET /api/complaints/user/697757158868e88ea1daa664 [36m304[0m 19.641 ms - -[0m[39m
+2026-01-27 11:17:51:1751 [35mhttp[39m: [35m[0mOPTIONS /api/complaints/detail/69775f72d2010e5ac9dd376b [32m204[0m 0.268 ms - 0[0m[39m
+2026-01-27 11:17:51:1751 [35mhttp[39m: [35m[0mOPTIONS /api/complaints/detail/69775f72d2010e5ac9dd376b [32m204[0m 0.186 ms - 0[0m[39m
+2026-01-27 11:17:51:1751 [35mhttp[39m: [35m[0mGET /api/complaints/detail/69775f72d2010e5ac9dd376b [36m304[0m 16.827 ms - -[0m[39m
+2026-01-27 11:17:51:1751 [35mhttp[39m: [35m[0mGET /api/complaints/detail/69775f72d2010e5ac9dd376b [36m304[0m 11.825 ms - -[0m[39m
+2026-01-27 11:18:04:184 [35mhttp[39m: [35m[0mOPTIONS /api/complaints/user/697757158868e88ea1daa664 [32m204[0m 0.332 ms - 0[0m[39m
+2026-01-27 11:18:04:184 [35mhttp[39m: [35m[0mOPTIONS /api/complaints/user/697757158868e88ea1daa664 [32m204[0m 0.211 ms - 0[0m[39m
+2026-01-27 11:18:04:184 [35mhttp[39m: [35m[0mGET /api/complaints/user/697757158868e88ea1daa664 [36m304[0m 20.497 ms - -[0m[39m
+2026-01-27 11:18:04:184 [35mhttp[39m: [35m[0mGET /api/complaints/user/697757158868e88ea1daa664 [36m304[0m 13.268 ms - -[0m[39m
+2026-01-27 13:43:09:439 [32minfo[39m: [32mMongoDB Connected: localhost[39m
+2026-01-27 13:43:09:439 [32minfo[39m: [32mServer running on port 5000[39m
+2026-01-27 13:43:09:439 [32minfo[39m: [32mEnvironment: development[39m
+2026-01-27 14:02:11:211 [35mhttp[39m: [35m[0mOPTIONS /api/auth/admin-login [32m204[0m 2.090 ms - 0[0m[39m
+2026-01-27 14:02:11:211 [35mhttp[39m: [35m[0mPOST /api/auth/admin-login [32m200[0m 341.883 ms - 480[0m[39m
+2026-01-27 14:02:11:211 [35mhttp[39m: [35m[0mOPTIONS /api/admin/complaints/department/WASTE_MANAGEMENT [32m204[0m 0.556 ms - 0[0m[39m
+2026-01-27 14:02:11:211 [35mhttp[39m: [35m[0mGET /api/admin/complaints/department/WASTE_MANAGEMENT [32m200[0m 190.132 ms - 2898577[0m[39m
+2026-01-27 14:02:11:211 [35mhttp[39m: [35m[0mOPTIONS /api/setup/teams/by-category/WASTE_MANAGEMENT [32m204[0m 0.189 ms - 0[0m[39m
+2026-01-27 14:02:12:212 [35mhttp[39m: [35m[0mGET /api/admin/complaints/department/WASTE_MANAGEMENT [36m304[0m 110.671 ms - -[0m[39m
+2026-01-27 14:02:12:212 [35mhttp[39m: [35m[0mGET /api/setup/teams/by-category/WASTE_MANAGEMENT [32m200[0m 16.924 ms - 325[0m[39m
+2026-01-27 14:02:12:212 [35mhttp[39m: [35m[0mOPTIONS /api/setup/ward-offices [32m204[0m 0.326 ms - 0[0m[39m
+2026-01-27 14:02:12:212 [35mhttp[39m: [35m[0mGET /api/setup/teams/by-category/WASTE_MANAGEMENT [36m304[0m 20.932 ms - -[0m[39m
+2026-01-27 14:02:12:212 [35mhttp[39m: [35m[0mGET /api/setup/ward-offices [32m200[0m 23.847 ms - 877[0m[39m
+2026-01-27 14:02:12:212 [35mhttp[39m: [35m[0mGET /api/setup/ward-offices [36m304[0m 9.708 ms - -[0m[39m
+2026-01-27 17:34:32:3432 [35mhttp[39m: [35m[0mOPTIONS /api/auth/logout [32m204[0m 0.142 ms - 0[0m[39m
+2026-01-27 17:34:32:3432 [35mhttp[39m: [35m[0mGET /api/auth/logout [32m200[0m 3.645 ms - 52[0m[39m
+2026-01-27 17:34:48:3448 [35mhttp[39m: [35m[0mOPTIONS /api/auth/login [32m204[0m 0.327 ms - 0[0m[39m
+2026-01-27 17:34:48:3448 [35mhttp[39m: [35m[0mPOST /api/auth/login [32m200[0m 100.542 ms - 441[0m[39m
+2026-01-27 17:34:48:3448 [35mhttp[39m: [35m[0mOPTIONS /api/complaints/user/697757158868e88ea1daa664 [32m204[0m 0.735 ms - 0[0m[39m
+2026-01-27 17:34:48:3448 [35mhttp[39m: [35m[0mOPTIONS /api/complaints/user/697757158868e88ea1daa664 [32m204[0m 0.233 ms - 0[0m[39m
+2026-01-27 17:34:48:3448 [35mhttp[39m: [35m[0mGET /api/complaints/user/697757158868e88ea1daa664 [32m200[0m 16.784 ms - 54718[0m[39m
+2026-01-27 17:34:48:3448 [35mhttp[39m: [35m[0mGET /api/complaints/user/697757158868e88ea1daa664 [36m304[0m 10.922 ms - -[0m[39m
+2026-01-27 17:34:51:3451 [35mhttp[39m: [35m[0mOPTIONS /api/complaints/detail/69775f72d2010e5ac9dd376b [32m204[0m 0.255 ms - 0[0m[39m
+2026-01-27 17:34:51:3451 [35mhttp[39m: [35m[0mOPTIONS /api/complaints/detail/69775f72d2010e5ac9dd376b [32m204[0m 0.232 ms - 0[0m[39m
+2026-01-27 17:34:51:3451 [35mhttp[39m: [35m[0mGET /api/complaints/detail/69775f72d2010e5ac9dd376b [32m200[0m 21.241 ms - 54645[0m[39m
+2026-01-27 17:34:51:3451 [35mhttp[39m: [35m[0mGET /api/complaints/detail/69775f72d2010e5ac9dd376b [36m304[0m 8.071 ms - -[0m[39m
+2026-01-27 17:35:10:3510 [35mhttp[39m: [35m[0mOPTIONS /api/complaints/detail/69775f72d2010e5ac9dd376b [32m204[0m 0.218 ms - 0[0m[39m
+2026-01-27 17:35:10:3510 [35mhttp[39m: [35m[0mGET /api/complaints/detail/69775f72d2010e5ac9dd376b [36m304[0m 6.859 ms - -[0m[39m
+2026-01-27 17:35:31:3531 [35mhttp[39m: [35m[0mOPTIONS /api/complaints/user/697757158868e88ea1daa664 [32m204[0m 0.227 ms - 0[0m[39m
+2026-01-27 17:35:31:3531 [35mhttp[39m: [35m[0mOPTIONS /api/complaints/user/697757158868e88ea1daa664 [32m204[0m 0.439 ms - 0[0m[39m
+2026-01-27 17:35:31:3531 [35mhttp[39m: [35m[0mGET /api/complaints/user/697757158868e88ea1daa664 [36m304[0m 17.449 ms - -[0m[39m
+2026-01-27 17:35:31:3531 [35mhttp[39m: [35m[0mGET /api/complaints/user/697757158868e88ea1daa664 [36m304[0m 13.599 ms - -[0m[39m
+2026-01-27 17:40:26:4026 [35mhttp[39m: [35m[0mOPTIONS /api/complaints/detail/69775f72d2010e5ac9dd376b [32m204[0m 0.149 ms - 0[0m[39m
+2026-01-27 17:40:26:4026 [35mhttp[39m: [35m[0mOPTIONS /api/complaints/detail/69775f72d2010e5ac9dd376b [32m204[0m 0.344 ms - 0[0m[39m
+2026-01-27 17:40:26:4026 [35mhttp[39m: [35m[0mGET /api/complaints/detail/69775f72d2010e5ac9dd376b [36m304[0m 12.715 ms - -[0m[39m
+2026-01-27 17:40:26:4026 [35mhttp[39m: [35m[0mGET /api/complaints/detail/69775f72d2010e5ac9dd376b [36m304[0m 9.651 ms - -[0m[39m
+2026-01-27 17:41:08:418 [35mhttp[39m: [35m[0mOPTIONS /api/complaints/user/697757158868e88ea1daa664 [32m204[0m 0.202 ms - 0[0m[39m
+2026-01-27 17:41:08:418 [35mhttp[39m: [35m[0mOPTIONS /api/complaints/user/697757158868e88ea1daa664 [32m204[0m 0.220 ms - 0[0m[39m
+2026-01-27 17:41:08:418 [35mhttp[39m: [35m[0mGET /api/complaints/user/697757158868e88ea1daa664 [36m304[0m 28.737 ms - -[0m[39m
+2026-01-27 17:41:08:418 [35mhttp[39m: [35m[0mGET /api/complaints/user/697757158868e88ea1daa664 [36m304[0m 15.426 ms - -[0m[39m
+2026-01-27 17:41:11:4111 [35mhttp[39m: [35m[0mOPTIONS /api/complaints/detail/69775f72d2010e5ac9dd376b [32m204[0m 3.037 ms - 0[0m[39m
+2026-01-27 17:41:11:4111 [35mhttp[39m: [35m[0mGET /api/complaints/detail/69775f72d2010e5ac9dd376b [36m304[0m 12.883 ms - -[0m[39m
+2026-01-27 17:41:11:4111 [35mhttp[39m: [35m[0mGET /api/complaints/detail/69775f72d2010e5ac9dd376b [36m304[0m 11.890 ms - -[0m[39m
+2026-01-27 17:41:20:4120 [35mhttp[39m: [35m[0mOPTIONS /api/complaints/user/697757158868e88ea1daa664 [32m204[0m 0.127 ms - 0[0m[39m
+2026-01-27 17:41:20:4120 [35mhttp[39m: [35m[0mOPTIONS /api/complaints/user/697757158868e88ea1daa664 [32m204[0m 0.594 ms - 0[0m[39m
+2026-01-27 17:41:20:4120 [35mhttp[39m: [35m[0mGET /api/complaints/user/697757158868e88ea1daa664 [36m304[0m 15.565 ms - -[0m[39m
+2026-01-27 17:41:20:4120 [35mhttp[39m: [35m[0mGET /api/complaints/user/697757158868e88ea1daa664 [36m304[0m 14.050 ms - -[0m[39m
+2026-01-27 17:41:48:4148 [35mhttp[39m: [35m[0mOPTIONS /api/complaints/detail/69775f72d2010e5ac9dd376b [32m204[0m 0.106 ms - 0[0m[39m
+2026-01-27 17:41:48:4148 [35mhttp[39m: [35m[0mOPTIONS /api/complaints/detail/69775f72d2010e5ac9dd376b [32m204[0m 0.171 ms - 0[0m[39m
+2026-01-27 17:41:48:4148 [35mhttp[39m: [35m[0mGET /api/complaints/detail/69775f72d2010e5ac9dd376b [36m304[0m 13.821 ms - -[0m[39m
+2026-01-27 17:41:48:4148 [35mhttp[39m: [35m[0mGET /api/complaints/detail/69775f72d2010e5ac9dd376b [36m304[0m 9.918 ms - -[0m[39m
+2026-01-27 17:41:50:4150 [35mhttp[39m: [35m[0mOPTIONS /api/complaints/user/697757158868e88ea1daa664 [32m204[0m 0.158 ms - 0[0m[39m
+2026-01-27 17:41:50:4150 [35mhttp[39m: [35m[0mOPTIONS /api/complaints/user/697757158868e88ea1daa664 [32m204[0m 0.174 ms - 0[0m[39m
+2026-01-27 17:41:50:4150 [35mhttp[39m: [35m[0mGET /api/complaints/user/697757158868e88ea1daa664 [36m304[0m 19.973 ms - -[0m[39m
+2026-01-27 17:41:50:4150 [35mhttp[39m: [35m[0mGET /api/complaints/user/697757158868e88ea1daa664 [36m304[0m 15.441 ms - -[0m[39m
+2026-01-27 17:42:57:4257 [35mhttp[39m: [35m[0mOPTIONS /api/complaints/user/697757158868e88ea1daa664 [32m204[0m 0.166 ms - 0[0m[39m
+2026-01-27 17:42:57:4257 [35mhttp[39m: [35m[0mOPTIONS /api/complaints/user/697757158868e88ea1daa664 [32m204[0m 0.233 ms - 0[0m[39m
+2026-01-27 17:42:57:4257 [35mhttp[39m: [35m[0mGET /api/complaints/user/697757158868e88ea1daa664 [36m304[0m 35.713 ms - -[0m[39m
+2026-01-27 17:42:57:4257 [35mhttp[39m: [35m[0mGET /api/complaints/user/697757158868e88ea1daa664 [36m304[0m 20.360 ms - -[0m[39m
+2026-01-27 17:42:58:4258 [35mhttp[39m: [35m[0mOPTIONS /api/complaints/detail/69775f72d2010e5ac9dd376b [32m204[0m 0.295 ms - 0[0m[39m
+2026-01-27 17:42:58:4258 [35mhttp[39m: [35m[0mOPTIONS /api/complaints/detail/69775f72d2010e5ac9dd376b [32m204[0m 0.213 ms - 0[0m[39m
+2026-01-27 17:42:58:4258 [35mhttp[39m: [35m[0mGET /api/complaints/detail/69775f72d2010e5ac9dd376b [36m304[0m 14.619 ms - -[0m[39m
+2026-01-27 17:42:58:4258 [35mhttp[39m: [35m[0mGET /api/complaints/detail/69775f72d2010e5ac9dd376b [36m304[0m 16.297 ms - -[0m[39m
+2026-01-27 17:43:13:4313 [35mhttp[39m: [35m[0mOPTIONS /api/auth/logout [32m204[0m 0.091 ms - 0[0m[39m
+2026-01-27 17:43:13:4313 [35mhttp[39m: [35m[0mGET /api/auth/logout [36m304[0m 0.457 ms - -[0m[39m
+2026-01-27 17:50:19:5019 [35mhttp[39m: [35m[0mOPTIONS /api/auth/login [32m204[0m 0.210 ms - 0[0m[39m
+2026-01-27 17:50:19:5019 [35mhttp[39m: [35m[0mPOST /api/auth/login [32m200[0m 119.412 ms - 441[0m[39m
+2026-01-27 17:50:19:5019 [35mhttp[39m: [35m[0mOPTIONS /api/complaints/user/697757158868e88ea1daa664 [32m204[0m 0.245 ms - 0[0m[39m
+2026-01-27 17:50:19:5019 [35mhttp[39m: [35m[0mOPTIONS /api/complaints/user/697757158868e88ea1daa664 [32m204[0m 0.207 ms - 0[0m[39m
+2026-01-27 17:50:19:5019 [35mhttp[39m: [35m[0mGET /api/complaints/user/697757158868e88ea1daa664 [36m304[0m 14.832 ms - -[0m[39m
+2026-01-27 17:50:19:5019 [35mhttp[39m: [35m[0mGET /api/complaints/user/697757158868e88ea1daa664 [36m304[0m 13.723 ms - -[0m[39m
+2026-01-27 17:50:24:5024 [35mhttp[39m: [35m[0mOPTIONS /api/complaints/detail/69775f72d2010e5ac9dd376b [32m204[0m 0.824 ms - 0[0m[39m
+2026-01-27 17:50:24:5024 [35mhttp[39m: [35m[0mOPTIONS /api/complaints/detail/69775f72d2010e5ac9dd376b [32m204[0m 0.110 ms - 0[0m[39m
+2026-01-27 17:50:24:5024 [35mhttp[39m: [35m[0mGET /api/complaints/detail/69775f72d2010e5ac9dd376b [36m304[0m 20.336 ms - -[0m[39m
+2026-01-27 17:50:24:5024 [35mhttp[39m: [35m[0mGET /api/complaints/detail/69775f72d2010e5ac9dd376b [36m304[0m 10.046 ms - -[0m[39m
+2026-01-27 18:07:01:71 [35mhttp[39m: [35m[0mOPTIONS /api/auth/logout [32m204[0m 0.115 ms - 0[0m[39m
+2026-01-27 18:07:01:71 [35mhttp[39m: [35m[0mGET /api/auth/logout [36m304[0m 0.349 ms - -[0m[39m
