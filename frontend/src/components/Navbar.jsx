@@ -9,7 +9,6 @@ export const Navbar = () => {
   const { user, logout, isAuthenticated } = useContext(AuthContext);
   const [isOpen, setIsOpen] = useState(false);
   const [scrollY, setScrollY] = useState(0);
-  const displayName = user?.role === 'ADMIN' ? 'Admin' : user?.name;
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
@@ -59,24 +58,7 @@ export const Navbar = () => {
                       to="/admin-dashboard"
                       className="text-gray-300 hover:text-[#7ED957] transition-colors duration-300 font-medium relative group"
                     >
-                      Admin Dashboard
-                      <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#7ED957] group-hover:w-full transition-all duration-300"></span>
-                    </Link>
-                    <Link
-                      to="/supervisor"
-                      className="text-gray-300 hover:text-[#7ED957] transition-colors duration-300 font-medium relative group"
-                    >
-                      Supervisor
-                      <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#7ED957] group-hover:w-full transition-all duration-300"></span>
-                    </Link>
-                  </>
-                ) : user?.role === 'SUPERVISOR' ? (
-                  <>
-                    <Link
-                      to="/supervisor-dashboard"
-                      className="text-gray-300 hover:text-[#7ED957] transition-colors duration-300 font-medium relative group"
-                    >
-                      Supervisor Dashboard
+                      Dashboard
                       <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#7ED957] group-hover:w-full transition-all duration-300"></span>
                     </Link>
                   </>
@@ -99,7 +81,7 @@ export const Navbar = () => {
                   </>
                 )}
                 <div className="flex items-center gap-4 border-l border-[#7ED957]/30 pl-6 ml-2">
-                  <span className="text-gray-300 font-medium">{displayName}</span>
+                  <span className="text-gray-300 font-medium">{user?.name}</span>
                   <button
                     onClick={handleLogout}
                     className="px-4 py-2 bg-red-500/90 hover:bg-red-600 text-white rounded-lg transition-all duration-300 font-semibold hover:shadow-lg hover:shadow-red-500/30"
@@ -122,12 +104,6 @@ export const Navbar = () => {
                   className="px-6 py-2.5 border border-[#7ED957] text-[#7ED957] rounded-lg hover:bg-[#7ED957] hover:text-[#0a0f0a] transition-all duration-300 font-semibold"
                 >
                   Admin Login
-                </Link>
-                <Link
-                  to="/supervisor-login"
-                  className="px-6 py-2.5 border border-purple-500 text-purple-300 rounded-lg hover:bg-purple-600/40 transition-all duration-300 font-semibold"
-                >
-                  Supervisor Login
                 </Link>
               </>
             )}
@@ -156,35 +132,16 @@ export const Navbar = () => {
             {isAuthenticated ? (
               <>
                 <div className="px-4 py-2 text-sm font-medium text-[#7ED957] border-b border-[#7ED957]/20 mb-3">
-                  Hello, {displayName}
+                  Hello, {user?.name}
                 </div>
                 {user?.role === 'ADMIN' ? (
-                  <>
-                    <Link
-                      to="/admin-dashboard"
-                      onClick={() => setIsOpen(false)}
-                      className="block text-gray-300 hover:text-[#7ED957] hover:bg-[#7ED957]/10 px-4 py-3 rounded-lg transition-all duration-300"
-                    >
-                      Admin Dashboard
-                    </Link>
-                    <Link
-                      to="/supervisor"
-                      onClick={() => setIsOpen(false)}
-                      className="block text-gray-300 hover:text-[#7ED957] hover:bg-[#7ED957]/10 px-4 py-3 rounded-lg transition-all duration-300"
-                    >
-                      Supervisor
-                    </Link>
-                  </>
-                ) : user?.role === 'SUPERVISOR' ? (
-                  <>
-                    <Link
-                      to="/supervisor-dashboard"
-                      onClick={() => setIsOpen(false)}
-                      className="block text-gray-300 hover:text-[#7ED957] hover:bg-[#7ED957]/10 px-4 py-3 rounded-lg transition-all duration-300"
-                    >
-                      Supervisor Dashboard
-                    </Link>
-                  </>
+                  <Link
+                    to="/admin-dashboard"
+                    onClick={() => setIsOpen(false)}
+                    className="block text-gray-300 hover:text-[#7ED957] hover:bg-[#7ED957]/10 px-4 py-3 rounded-lg transition-all duration-300"
+                  >
+                    Dashboard
+                  </Link>
                 ) : (
                   <>
                     <Link
@@ -225,13 +182,6 @@ export const Navbar = () => {
                   className="block text-center border border-[#7ED957] text-[#7ED957] hover:bg-[#7ED957] hover:text-[#0a0f0a] px-4 py-3 rounded-lg transition-all duration-300"
                 >
                   Admin Login
-                </Link>
-                <Link
-                  to="/supervisor-login"
-                  onClick={() => setIsOpen(false)}
-                  className="block text-center border border-purple-500 text-purple-300 hover:bg-purple-600/40 px-4 py-3 rounded-lg transition-all duration-300"
-                >
-                  Supervisor Login
                 </Link>
               </>
             )}

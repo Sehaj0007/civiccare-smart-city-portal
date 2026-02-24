@@ -96,6 +96,18 @@ export const LandingPage = () => {
                   <span className="relative z-10">Register Now</span>
                   <div className="absolute inset-0 bg-[#9EF76E] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
                 </Link>
+                <Link
+                  to="/login"
+                  className="px-8 py-4 border-2 border-[#7ED957] text-[#7ED957] rounded-lg font-bold text-lg hover:bg-[#7ED957] hover:text-[#0a0f0a] transition-all duration-300 hover:scale-105"
+                >
+                  Citizen Login
+                </Link>
+                <Link
+                  to="/admin-login"
+                  className="px-8 py-4 bg-white/5 border-2 border-white/10 text-white rounded-lg font-bold text-lg hover:bg-white/10 transition-all duration-300 hover:scale-105"
+                >
+                  Admin Portal
+                </Link>
               </div>
             </div>
 
@@ -407,7 +419,7 @@ export const LandingPage = () => {
       </div>
 
       {/* Animations */}
-      <style>{`
+      <style jsx>{`
         @keyframes fadeIn {
           from { opacity: 0; }
           to { opacity: 1; }

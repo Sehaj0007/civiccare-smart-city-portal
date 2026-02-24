@@ -16,11 +16,6 @@ export const MyComplaintsPage = () => {
   const [notifications, setNotifications] = useState([]);
 
   useEffect(() => {
-    if (!user || !user._id) {
-      setLoading(false);
-      return;
-    }
-    
     fetchComplaints();
 
     // Listen to real-time updates
@@ -40,14 +35,9 @@ export const MyComplaintsPage = () => {
     return () => {
       offComplaintStatusUpdate();
     };
-  }, [user?._id]);
+  }, [user._id]);
 
   const fetchComplaints = async () => {
-    if (!user || !user._id) {
-      setLoading(false);
-      setError('User not authenticated. Please log in again.');
-      return;
-    }
     setLoading(true);
     setError('');
     try {
@@ -83,24 +73,6 @@ export const MyComplaintsPage = () => {
         <div className="text-center">
           <div className="inline-block animate-spin rounded-full h-16 w-16 border-4 border-[#7ED957] border-t-transparent"></div>
           <p className="mt-4 text-gray-400 font-medium text-lg">Loading complaints...</p>
-        </div>
-      </div>
-    );
-  }
-
-  if (!user || !user._id) {
-    return (
-      <div className="min-h-screen bg-[#0a0f0a] flex items-center justify-center pt-20">
-        <div className="text-center">
-          <div className="text-6xl mb-4">🔐</div>
-          <h2 className="text-2xl font-bold text-white mb-2">Authentication Required</h2>
-          <p className="text-gray-400 mb-6">Please log in to view your complaints</p>
-          <Link
-            to="/login"
-            className="inline-block px-6 py-3 bg-gradient-to-r from-[#7ED957] to-[#9EF76E] text-[#0a0f0a] rounded-xl font-bold hover:from-[#9EF76E] hover:to-[#7ED957] transition-all duration-300"
-          >
-            Go to Login
-          </Link>
         </div>
       </div>
     );
@@ -297,7 +269,7 @@ export const MyComplaintsPage = () => {
         )}
       </div>
 
-      <style jsx="true">{`
+      <style jsx>{`
         @keyframes slideDown {
           from {
             opacity: 0;

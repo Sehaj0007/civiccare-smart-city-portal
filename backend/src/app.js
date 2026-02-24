@@ -17,8 +17,6 @@ import logger from './config/logger.js';
 import authRoutes from './routes/authRoutes.js';
 import complaintRoutes from './routes/complaintRoutes.js';
 import adminRoutes from './routes/adminRoutes.js';
-import supervisorRoutes from './routes/supervisorRoutes.js';
-import supervisorAnalyticsRoutes from './routes/supervisorAnalyticsRoutes.js';
 import setupRoutes from './routes/setupRoutes.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -26,63 +24,21 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 
-// ============================================
-// MIDDLEWARE CONFIGURATION - CRITICAL ORDER
-// ============================================
-
-// 1. CORS MIDDLEWARE (MUST BE FIRST)
-const corsOptions = {
-  origin: function (origin, callback) {
-    const allowedOrigins = (process.env.ALLOWED_ORIGINS || '').split(',').map(o => o.trim()).filter(Boolean);
-    
-    // Add default local origins
-    const defaultOrigins = [
-      'http://localhost:5173',
-      'http://localhost:5174',
-      'http://127.0.0.1:5173',
-      'http://127.0.0.1:5174',
-      'http://localhost:3000',
-    ];
-    
-    const allOrigins = [...new Set([...allowedOrigins, ...defaultOrigins])];
-
-    // Allow requests without origin (mobile apps, curl requests)
-    if (!origin || allOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      console.log(`CORS blocked: ${origin}`);
-      callback(null, true); // Allow all in dev, restrict in production
-    }
-  },
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS', 'HEAD'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
-  optionsSuccessStatus: 200,
-  maxAge: 86400, // 24 hours
-};
-
-app.use(cors(corsOptions));
-
-// 2. Security Middleware
+// Security Middleware
 app.use(helmet({
-  crossOriginResourcePolicy: { policy: 'cross-origin' },
-  contentSecurityPolicy: false,
+  crossOriginResourcePolicy: { policy: "cross-origin" }
 }));
-
 app.use(mongoSanitize());
 
-// 3. Rate Limiting
 const limiter = rateLimit({
-  windowMs: parseInt(process.env.RATE_LIMIT_WINDOW) || 15 * 60 * 1000,
-  max: parseInt(process.env.RATE_LIMIT_MAX) || 100,
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // Limit each IP to 100 requests per windowMs
   standardHeaders: true,
   legacyHeaders: false,
-  message: 'Too many requests, please try again later',
-  skip: (req) => req.path.startsWith('/api/auth'),
 });
 app.use(limiter);
 
-// 4. Logging Middleware
+// Logging Middleware
 const morganFormat = process.env.NODE_ENV === 'development' ? 'dev' : 'combined';
 app.use(
   morgan(morganFormat, {
@@ -92,54 +48,45 @@ app.use(
   })
 );
 
-// 5. Parser Middleware
+// Middleware
+app.use(
+  cors({
+    origin: process.env.ALLOWED_ORIGINS?.split(',') || [
+      'http://localhost:5173',
+      'http://localhost:3000',
+    ],
+    credentials: true,
+  })
+);
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
-// 6. Static Files
+// Serve uploaded files
 app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 
-// ============================================
-// API ROUTES
-// ============================================
-
-// Health Check
-app.get('/health', (req, res) => {
-  res.status(200).json({ 
-    success: true, 
-    message: 'Server is running',
-    timestamp: new Date().toISOString(),
-  });
-});
-
-// API Routes
+// Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/complaints', complaintRoutes);
 app.use('/api/admin', adminRoutes);
-app.use('/api/supervisors', supervisorRoutes);
-app.use('/api/supervisor', supervisorAnalyticsRoutes);
 app.use('/api/setup', setupRoutes);
 
-// ============================================
-// ERROR HANDLING & 404
-// ============================================
+// Health check
+app.get('/health', (req, res) => {
+  res.status(200).json({ success: true, message: 'Server is running' });
+});
 
-// 404 Handler
+// 404 handler
 app.use((req, res) => {
   res.status(404).json({
     success: false,
     message: 'Route not found',
-    path: req.originalUrl,
   });
 });
 
-// Global Error Handler (MUST be last)
+// Error handling middleware
 app.use(errorMiddleware);
 
-// ============================================
-// HTTP SERVER & SOCKET.IO
-// ============================================
-
+// Create HTTP server
 const server = http.createServer(app);
 
 // Initialize Socket.IO

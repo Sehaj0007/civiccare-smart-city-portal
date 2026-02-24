@@ -1,10 +1,6 @@
 import axios from 'axios';
 
-const rawApiUrl = (import.meta.env.VITE_API_URL || '/api').trim();
-const normalizedApiUrl = rawApiUrl.endsWith('/api')
-  ? rawApiUrl
-  : `${rawApiUrl.replace(/\/+$/, '')}/api`;
-const API_BASE_URL = normalizedApiUrl;
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
 const api = axios.create({
   baseURL: API_BASE_URL,
@@ -30,24 +26,9 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401) {
-      const storedUser = localStorage.getItem('user');
-      let redirectPath = '/login';
-      if (storedUser) {
-        try {
-          const parsedUser = JSON.parse(storedUser);
-          if (parsedUser?.role === 'ADMIN') {
-            redirectPath = '/admin-login';
-          } else if (parsedUser?.role === 'SUPERVISOR') {
-            redirectPath = '/supervisor-login';
-          }
-        } catch {
-          redirectPath = '/login';
-        }
-      }
       localStorage.removeItem('token');
       localStorage.removeItem('user');
-      localStorage.removeItem('supervisor');
-      window.location.href = redirectPath;
+      window.location.href = '/login';
     }
     return Promise.reject(error);
   }

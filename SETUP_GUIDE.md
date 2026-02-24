@@ -97,7 +97,7 @@ npm run dev
 1. Click "Register as Citizen" or go to /register
 2. Fill in details:
    - Name: John Doe
-   - Email:  
+   - Email: johndoe@example.com
    - Phone: 9876543210 (must be 10 digits)
    - Password: password123
 3. Click Register

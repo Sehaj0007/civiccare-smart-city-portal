@@ -296,7 +296,7 @@ export const ComplaintDetailPage = () => {
         </div>
       </div>
 
-      <style jsx="true">{`
+      <style jsx>{`
         @keyframes fadeIn {
           from {
             opacity: 0;

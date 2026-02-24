@@ -8,7 +8,6 @@
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
     "seed": "node src/seeds/seedData.js",
-    "seed:enhanced": "node src/seeds/seedEnhanced.js",
     "test": "cross-env NODE_OPTIONS=--experimental-vm-modules MONGODB_URI=mongodb://localhost:27017/civiccare_test jest"
   },
   "keywords": [

@@ -5,7 +5,6 @@ export const authService = {
   register: (userData) => api.post('/auth/register', userData),
   login: (credentials) => api.post('/auth/login', credentials),
   adminLogin: (credentials) => api.post('/auth/admin-login', credentials),
-  supervisorLogin: (credentials) => api.post('/auth/supervisor-login', credentials),
   getMe: () => api.get('/auth/me'),
   logout: () => api.get('/auth/logout'),
 };
@@ -27,13 +26,6 @@ export const adminService = {
   escalateComplaint: (data) => api.post('/admin/escalate', data),
   updateStatus: (id, data) => api.patch(`/admin/complaints/${id}/status`, data),
   getDepartmentComplaints: (category, params) => api.get(`/admin/complaints/department/${category}`, { params }),
-};
-
-// Supervisor Analytics Services
-export const supervisorService = {
-  getDashboard: (params) => api.get('/supervisors/analytics/overview', { params }),
-  getOverdueAlerts: () => api.get('/supervisors/analytics/overdue-alerts'),
-  getHeatmap: () => api.get('/supervisors/analytics/heatmap'),
 };
 
 // Setup Services
