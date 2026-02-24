@@ -7,12 +7,13 @@ import { catchAsyncErrors } from '../utils/errorUtils.js';
 // @desc    Create a new complaint
 // @route   POST /api/complaints
 export const createComplaint = catchAsyncErrors(async (req, res, next) => {
-  const { category, complaintType, description, locality, address, imageUrl } = req.body;
+  const { title, category, complaintType, description, locality, address, imageUrl } = req.body;
 
   console.log('Creating complaint for user:', req.user._id);
-  console.log('Complaint data:', { category, complaintType, locality });
+  console.log('Complaint data:', { title, category, complaintType, locality });
 
   const complaint = await Complaint.create({
+    title,
     category,
     complaintType,
     description,

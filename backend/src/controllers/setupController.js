@@ -47,7 +47,14 @@ export const getAllTeams = catchAsyncErrors(async (req, res, next) => {
 export const getTeamsByCategory = catchAsyncErrors(async (req, res, next) => {
   const { category } = req.params;
 
-  const teams = await LabourTeam.find({ departmentCategory: category });
+  // Map complaint categories to labour team categories
+  const categoryMapping = {
+    'POTHOLES': 'ROAD_MAINTENANCE',
+  };
+
+  const mappedCategory = categoryMapping[category] || category;
+
+  const teams = await LabourTeam.find({ departmentCategory: mappedCategory });
 
   res.status(200).json({
     success: true,

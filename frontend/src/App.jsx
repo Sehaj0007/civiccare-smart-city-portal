@@ -14,6 +14,10 @@ import { RaiseComplaintPage } from './pages/RaiseComplaintPage';
 import { MyComplaintsPage } from './pages/MyComplaintsPage';
 import { ComplaintDetailPage } from './pages/ComplaintDetailPage';
 import { AdminDashboard } from './pages/AdminDashboard';
+import { Supervisor } from './pages/Supervisor';
+import { SupervisorLoginPage } from './pages/SupervisorLoginPage';
+import { SupervisorDashboard } from './pages/SupervisorDashboard';
+import { DepartmentComplaints } from './pages/DepartmentComplaints';
 import TermsAndConditions from './pages/TermsAndConditions';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 
@@ -23,7 +27,7 @@ import './index.css';
 function App() {
   return (
     <ErrorBoundary>
-      <Router>
+      <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <AuthProvider>
           <Navbar />
           <Toaster position="top-right" />
@@ -32,6 +36,7 @@ function App() {
             <Route path="/" element={<LandingPage />} />
             <Route path="/login" element={<LoginPage isAdmin={false} />} />
             <Route path="/admin-login" element={<LoginPage isAdmin={true} />} />
+            <Route path="/supervisor-login" element={<SupervisorLoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
@@ -69,6 +74,32 @@ function App() {
                 <AdminRoute>
                   <AdminDashboard />
                 </AdminRoute>
+              }
+            />
+            <Route
+              path="/supervisor"
+              element={
+                <AdminRoute>
+                  <Supervisor />
+                </AdminRoute>
+              }
+            />
+            <Route
+              path="/admin/department/:categoryId"
+              element={
+                <AdminRoute>
+                  <DepartmentComplaints />
+                </AdminRoute>
+              }
+            />
+
+            {/* Supervisor Routes */}
+            <Route
+              path="/supervisor-dashboard"
+              element={
+                <ProtectedRoute requiredRole="SUPERVISOR">
+                  <SupervisorDashboard />
+                </ProtectedRoute>
               }
             />
 

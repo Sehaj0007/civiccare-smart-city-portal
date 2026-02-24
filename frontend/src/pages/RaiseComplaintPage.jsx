@@ -9,6 +9,7 @@ export const RaiseComplaintPage = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [formData, setFormData] = useState({
+    title: '',
     category: '',
     complaintType: '',
     description: '',
@@ -24,6 +25,10 @@ export const RaiseComplaintPage = () => {
     { value: 'PUBLIC_PROPERTY', label: 'Vandalised Public Property', icon: '🏗️' },
     { value: 'E_WASTE', label: 'E-Waste Management', icon: '📱' },
     { value: 'SECURITY', label: 'Security & Threat Awareness', icon: '🔒' },
+    { value: 'HEALTH', label: 'Health & Sanitation', icon: '🏥' },
+    { value: 'ENVIRONMENT', label: 'Environmental Issues', icon: '🌿' },
+    { value: 'TRANSPORT', label: 'Public Transport', icon: '🚌' },
+    { value: 'EDUCATION', label: 'Education Facilities', icon: '📚' },
   ];
 
   const complaintTypes = {
@@ -33,6 +38,10 @@ export const RaiseComplaintPage = () => {
     PUBLIC_PROPERTY: ['Damaged Bench', 'Broken Toilet', 'Vandalised Signage'],
     E_WASTE: ['E-Waste Pickup Request', 'Improper Disposal'],
     SECURITY: ['Suspicious Activity', 'Unsafe Condition', 'Street Crime'],
+    HEALTH: ['Medical Waste', 'Sanitation Issue', 'Health Hazard'],
+    ENVIRONMENT: ['Air Pollution', 'Water Pollution', 'Noise Pollution'],
+    TRANSPORT: ['Bus Delay', 'Traffic Signal Issue', 'Parking Problem'],
+    EDUCATION: ['School Maintenance', 'Teacher Shortage', 'Facility Issue'],
   };
 
   const handleChange = (e) => {
@@ -62,6 +71,7 @@ export const RaiseComplaintPage = () => {
     try {
       await complaintService.createComplaint(formData);
       setFormData({
+        title: '',
         category: '',
         complaintType: '',
         description: '',
@@ -130,6 +140,25 @@ export const RaiseComplaintPage = () => {
                 </option>
               ))}
             </select>
+          </div>
+
+          {/* Title */}
+          <div>
+            <label className="block text-gray-300 font-semibold mb-3 flex items-center gap-2">
+              <svg className="w-5 h-5 text-[#7ED957]" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clipRule="evenodd" />
+              </svg>
+              Complaint Title *
+            </label>
+            <input
+              type="text"
+              name="title"
+              value={formData.title}
+              onChange={handleChange}
+              className="w-full px-4 py-3 bg-[#0a0f0a] border-2 border-[#7ED957]/30 text-white rounded-xl focus:outline-none focus:border-[#7ED957] focus:ring-2 focus:ring-[#7ED957]/20 transition-all duration-200 placeholder-gray-500"
+              placeholder="Brief title for your complaint"
+              required
+            />
           </div>
 
           {/* Complaint Type */}
@@ -277,7 +306,7 @@ export const RaiseComplaintPage = () => {
         </form>
       </div>
 
-      <style jsx>{`
+      <style jsx="true">{`
         @keyframes fadeIn {
           from {
             opacity: 0;

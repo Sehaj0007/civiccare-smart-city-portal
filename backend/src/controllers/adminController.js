@@ -23,14 +23,22 @@ export const assignTeam = catchAsyncErrors(async (req, res, next) => {
 
   // Update complaint
   complaint.status = 'ASSIGNED';
-  complaint.actionType = 'ASSIGNED';
   complaint.assignedTeamId = teamId;
   complaint.assignedByAdminId = req.user._id;
-  complaint.remarks = remarks || '';
+  if (remarks) {
+    complaint.remarks.push({
+      status: 'ASSIGNED',
+      timestamp: new Date(),
+      remarks: remarks,
+    });
+  }
 
   await complaint.save();
 
   // Add complaint to team's assigned complaints
+  if (!team.assignedComplaints) {
+    team.assignedComplaints = [];
+  }
   if (!team.assignedComplaints.includes(complaintId)) {
     team.assignedComplaints.push(complaintId);
     await team.save();
@@ -70,7 +78,13 @@ export const escalateComplaint = catchAsyncErrors(async (req, res, next) => {
   complaint.actionType = 'FORWARDED';
   complaint.forwardedWardOfficeId = wardOfficeId;
   complaint.assignedByAdminId = req.user._id;
-  complaint.remarks = remarks || '';
+  if (remarks) {
+    complaint.remarks.push({
+      status: 'FORWARDED',
+      timestamp: new Date(),
+      remarks: remarks,
+    });
+  }
 
   await complaint.save();
 
@@ -131,9 +145,15 @@ export const getDepartmentComplaints = catchAsyncErrors(async (req, res, next) =
     'WASTE_MANAGEMENT',
     'POTHOLES',
     'ELECTRICITY',
+    'WATER',
+    'SANITATION',
     'PUBLIC_PROPERTY',
     'E_WASTE',
     'SECURITY',
+    'HEALTH',
+    'ENVIRONMENT',
+    'TRANSPORT',
+    'EDUCATION',
   ];
 
   if (!validCategories.includes(category)) {

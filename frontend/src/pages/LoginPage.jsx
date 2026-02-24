@@ -19,7 +19,8 @@ export const LoginPage = ({ isAdmin = false }) => {
     setError('');
     setLoading(true);
 
-    const result = await login(formData.email, formData.password, isAdmin);
+    const normalizedEmail = formData.email.trim().toLowerCase();
+    const result = await login(normalizedEmail, formData.password, isAdmin);
 
     if (result.success) {
       navigate(isAdmin ? '/admin-dashboard' : '/my-complaints');
@@ -89,6 +90,7 @@ export const LoginPage = ({ isAdmin = false }) => {
               name="email"
               value={formData.email}
               onChange={handleChange}
+              autoComplete="email"
               className="w-full px-4 py-3 bg-[#0a0f0a] border-2 border-[#7ED957]/30 text-white rounded-xl focus:outline-none focus:border-[#7ED957] focus:ring-2 focus:ring-[#7ED957]/20 transition-all duration-200 placeholder-gray-500"
               placeholder="Enter your email"
               required
@@ -107,6 +109,7 @@ export const LoginPage = ({ isAdmin = false }) => {
               name="password"
               value={formData.password}
               onChange={handleChange}
+              autoComplete="current-password"
               className="w-full px-4 py-3 bg-[#0a0f0a] border-2 border-[#7ED957]/30 text-white rounded-xl focus:outline-none focus:border-[#7ED957] focus:ring-2 focus:ring-[#7ED957]/20 transition-all duration-200 placeholder-gray-500"
               placeholder="Enter your password"
               required
@@ -185,7 +188,7 @@ export const LoginPage = ({ isAdmin = false }) => {
         )}
       </div>
 
-      <style jsx>{`
+      <style>{`
         @keyframes fadeIn {
           from {
             opacity: 0;
