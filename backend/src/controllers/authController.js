@@ -61,9 +61,19 @@ export const register = catchAsyncErrors(async (req, res, next) => {
 // @desc    Login user
 // @route   POST /api/auth/login
 export const login = catchAsyncErrors(async (req, res, next) => {
-  const email = req.body?.email?.trim()?.toLowerCase();
+  // Debug: Log incoming request body (remove in production)
+  console.log('[AUTH] Login attempt received:', { email: req.body?.email, body: Object.keys(req.body || {}) });
+  
+  // Get email and password from request body - handle both raw and normalized input
+  let email = req.body?.email;
   const password = req.body?.password;
-  const clientIP = req.ip || req.connection.remoteAddress;
+  
+  // If email exists, normalize it
+  if (email) {
+    email = String(email).trim().toLowerCase();
+  }
+  
+  const clientIP = req.ip || req.connection?.remoteAddress || 'unknown';
 
   // Check rate limiting (production only)
   const attempts = loginAttempts.get(clientIP) || { count: 0, lockoutUntil: 0 };
@@ -75,13 +85,23 @@ export const login = catchAsyncErrors(async (req, res, next) => {
   }
 
   if (!email || !password) {
+    console.log('[AUTH] Login failed: Missing email or password');
     return next(new ErrorHandler('Please provide email and password', 400));
   }
 
-  // Check for user
-  const user = await User.findOne({ email }).select('+password');
+  console.log('[AUTH] Looking for user with email:', email);
+
+  // Check for user - search with both lowercase and original email
+  let user = await User.findOne({ email }).select('+password');
+  
+  // If not found with lowercase, try without transformation
+  if (!user) {
+    user = await User.findOne({ email: req.body?.email }).select('+password');
+    console.log('[AUTH] Retry search with original email:', req.body?.email, 'Result:', user ? 'Found' : 'Not found');
+  }
 
   if (!user) {
+    console.log('[AUTH] User not found for email:', email);
     if (SHOULD_ENFORCE_LOCKOUT) {
       // Increment failed attempts
       attempts.count++;
@@ -93,10 +113,13 @@ export const login = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHandler('Invalid email or password', 401));
   }
 
+  console.log('[AUTH] User found, checking password...');
+
   // Check password
   const isMatch = await user.comparePassword(password);
 
   if (!isMatch) {
+    console.log('[AUTH] Password mismatch for user:', email);
     if (SHOULD_ENFORCE_LOCKOUT) {
       // Increment failed attempts
       attempts.count++;
@@ -110,6 +133,8 @@ export const login = catchAsyncErrors(async (req, res, next) => {
 
   // Reset attempts on successful login
   loginAttempts.delete(clientIP);
+
+  console.log('[AUTH] Login successful for user:', email);
 
   const token = generateToken(user._id);
 
@@ -148,12 +173,11 @@ export const adminLogin = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHandler('Please provide email and password', 400));
   }
 
-  // Check for user
+  // Check for user by exact email
   const user = await User.findOne({ email }).select('+password');
 
   if (!user) {
     if (SHOULD_ENFORCE_LOCKOUT) {
-      // Increment failed attempts
       attempts.count++;
       if (attempts.count >= MAX_LOGIN_ATTEMPTS) {
         attempts.lockoutUntil = now + LOCKOUT_TIME;
@@ -163,9 +187,9 @@ export const adminLogin = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHandler('Invalid email or password', 401));
   }
 
+  // Check if user has admin role
   if (user.role !== 'ADMIN') {
     if (SHOULD_ENFORCE_LOCKOUT) {
-      // Increment failed attempts
       attempts.count++;
       if (attempts.count >= MAX_LOGIN_ATTEMPTS) {
         attempts.lockoutUntil = now + LOCKOUT_TIME;
@@ -180,7 +204,6 @@ export const adminLogin = catchAsyncErrors(async (req, res, next) => {
 
   if (!isMatch) {
     if (SHOULD_ENFORCE_LOCKOUT) {
-      // Increment failed attempts
       attempts.count++;
       if (attempts.count >= MAX_LOGIN_ATTEMPTS) {
         attempts.lockoutUntil = now + LOCKOUT_TIME;
@@ -273,6 +296,56 @@ export const supervisorLogin = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
+// @desc    Login staff/team member
+// @route   POST /api/auth/staff-login
+export const staffLogin = catchAsyncErrors(async (req, res, next) => {
+  const email = req.body?.email?.trim()?.toLowerCase();
+  const password = req.body?.password;
+  const selectedCategory = req.body?.category?.trim();
+
+  if (!email || !password || !selectedCategory) {
+    return next(new ErrorHandler('Please provide email, password and category', 400));
+  }
+
+  const user = await User.findOne({ email }).select('+password');
+
+  if (!user) {
+    return next(new ErrorHandler('Invalid email or password', 401));
+  }
+
+  if (user.role !== 'TEAM_MEMBER') {
+    return next(new ErrorHandler('Access denied. Staff account required.', 403));
+  }
+
+  const isMatch = await user.comparePassword(password);
+  if (!isMatch) {
+    return next(new ErrorHandler('Invalid email or password', 401));
+  }
+
+  const allowedCategories = user.staffCategories || [];
+  if (!allowedCategories.includes(selectedCategory)) {
+    return next(new ErrorHandler('Selected category is not assigned to this staff account', 403));
+  }
+
+  const token = generateToken(user._id);
+
+  res.status(200).json({
+    success: true,
+    token,
+    user: {
+      _id: user._id,
+      id: user._id,
+      name: user.name,
+      email: user.email,
+      phone: user.phone,
+      role: user.role,
+      assignedTeamId: user.assignedTeamId,
+      staffCategories: allowedCategories,
+      activeCategory: selectedCategory,
+    },
+  });
+});
+
 // @desc    Get current logged in user
 // @route   GET /api/auth/me
 export const getMe = catchAsyncErrors(async (req, res, next) => {
@@ -298,8 +371,15 @@ export const getCSRFToken = catchAsyncErrors(async (req, res, next) => {
 // @desc    Logout user
 // @route   GET /api/auth/logout
 export const logout = catchAsyncErrors(async (req, res, next) => {
-  // In a stateless JWT system, logout is handled on the client side
-  // by removing the token. We can optionally blacklist the token here.
+  // Get token from header
+  const token = req.headers.authorization?.split(' ')[1];
+  
+  // Blacklist the token if it exists
+  if (token) {
+    const { blacklistToken } = await import('../utils/tokenUtils.js');
+    blacklistToken(token);
+  }
+
   res.status(200).json({
     success: true,
     message: 'Logged out successfully',

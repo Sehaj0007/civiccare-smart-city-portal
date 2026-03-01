@@ -5,6 +5,7 @@ export const validate = (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     const errorMessages = errors.array().map((err) => err.msg);
+    console.log('[VALIDATION] Errors:', errorMessages);
     return next(new ErrorHandler(errorMessages[0], 400));
   }
   next();
@@ -17,12 +18,13 @@ export const registerValidation = [
     .isLength({ min: 6 })
     .withMessage('Password must be at least 6 characters long'),
   body('phone')
-    .isMobilePhone()
+    .isMobilePhone('any')
     .withMessage('Please provide a valid phone number'),
 ];
 
+// Simplified login validation - don't normalize email in validation to avoid conflicts
 export const loginValidation = [
-  body('email').trim().normalizeEmail().isEmail().withMessage('Please provide a valid email'),
+  body('email').trim().isEmail().withMessage('Please provide a valid email'),
   body('password').notEmpty().withMessage('Password is required'),
 ];
 
