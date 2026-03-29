@@ -3,16 +3,20 @@ import LabourTeam from '../models/LabourTeam.js';
 import WardOffice from '../models/WardOffice.js';
 import ErrorHandler from '../utils/ErrorHandler.js';
 import { catchAsyncErrors } from '../utils/errorUtils.js';
+import { generateTrackingId } from '../utils/aiDetection.js';
 
 // @desc    Create a new complaint
 // @route   POST /api/complaints
 export const createComplaint = catchAsyncErrors(async (req, res, next) => {
-  const { category, complaintType, description, locality, address, imageUrl } = req.body;
+  const { title, category, complaintType, description, locality, address, imageUrl } = req.body;
+  const trackingId = generateTrackingId();
 
   console.log('Creating complaint for user:', req.user._id);
-  console.log('Complaint data:', { category, complaintType, locality });
+  console.log('Complaint data:', { title, category, complaintType, locality, trackingId });
 
   const complaint = await Complaint.create({
+    trackingId,
+    title,
     category,
     complaintType,
     description,
@@ -92,6 +96,22 @@ export const getComplaintById = catchAsyncErrors(async (req, res, next) => {
 
   if (!complaint) {
     return next(new ErrorHandler('Complaint not found', 404));
+  }
+
+  if (req.user.role === 'USER' && complaint.citizenId?._id?.toString() !== req.user._id.toString()) {
+    return next(new ErrorHandler('Not authorized to access this complaint', 403));
+  }
+
+  if (req.user.role === 'TEAM_MEMBER') {
+    const assignedTeam = complaint.assignedTeamId?._id
+      ? complaint.assignedTeamId
+      : complaint.assignedTeamId
+        ? await LabourTeam.findById(complaint.assignedTeamId)
+        : null;
+
+    if (!assignedTeam || assignedTeam.departmentCategory !== req.user.department) {
+      return next(new ErrorHandler('Not authorized to access this complaint', 403));
+    }
   }
 
   res.status(200).json({

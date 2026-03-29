@@ -24,8 +24,8 @@ router.get('/detail/:id', protect, getComplaintById);
 router.patch('/:id/feedback', protect, feedbackValidation, validate, addFeedback);
 
 // Admin routes
-router.get('/', protect, authorize('ADMIN'), getAllComplaints);
+router.get('/', protect, authorize('ADMIN', 'SUPERVISOR'), getAllComplaints);
 router.patch('/:id', protect, authorize('ADMIN'), updateComplaint);
-router.get('/stats/overview', protect, authorize('ADMIN'), getComplaintStats);
+router.get('/stats/overview', protect, authorize('ADMIN', 'SUPERVISOR'), getComplaintStats);
 
 export default router;

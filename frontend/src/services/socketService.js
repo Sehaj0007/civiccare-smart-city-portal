@@ -81,6 +81,12 @@ export const onNotification = (callback) => {
   }
 };
 
+export const onAdminComplaintUpdate = (callback) => {
+  if (socket) {
+    socket.on('admin-complaint-updated', callback);
+  }
+};
+
 export const offNewComplaint = () => {
   if (socket) {
     socket.off('new-complaint');
@@ -108,5 +114,11 @@ export const offComplaintEscalated = () => {
 export const offNotification = () => {
   if (socket) {
     socket.off('notification');
+  }
+};
+
+export const offAdminComplaintUpdate = () => {
+  if (socket) {
+    socket.off('admin-complaint-updated');
   }
 };

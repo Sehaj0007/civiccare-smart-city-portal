@@ -12,7 +12,7 @@ export const validate = (req, res, next) => {
 
 export const registerValidation = [
   body('name').trim().notEmpty().withMessage('Name is required'),
-  body('email').isEmail().withMessage('Please provide a valid email'),
+  body('email').trim().normalizeEmail().isEmail().withMessage('Please provide a valid email'),
   body('password')
     .isLength({ min: 6 })
     .withMessage('Password must be at least 6 characters long'),
@@ -22,11 +22,12 @@ export const registerValidation = [
 ];
 
 export const loginValidation = [
-  body('email').isEmail().withMessage('Please provide a valid email'),
+  body('email').trim().normalizeEmail().isEmail().withMessage('Please provide a valid email'),
   body('password').notEmpty().withMessage('Password is required'),
 ];
 
 export const complaintValidation = [
+  body('title').trim().notEmpty().withMessage('Title is required'),
   body('category').trim().notEmpty().withMessage('Category is required'),
   body('complaintType').trim().notEmpty().withMessage('Complaint type is required'),
   body('description').trim().notEmpty().withMessage('Description is required'),
