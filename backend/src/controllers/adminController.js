@@ -127,6 +127,7 @@ export const escalateComplaint = catchAsyncErrors(async (req, res, next) => {
   }
 
   await complaint.save();
+  console.log(`[Escalation] Complaint ${complaint.trackingId} escalated with status: ${complaint.status}`);
 
   // Add complaint to ward office's forwarded complaints
   if (!wardOffice.forwardedComplaints.includes(complaintId)) {

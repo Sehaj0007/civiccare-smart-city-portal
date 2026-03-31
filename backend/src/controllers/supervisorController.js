@@ -6,6 +6,35 @@ import ActivityLog from '../models/ActivityLog.js';
 import ErrorHandler from '../utils/ErrorHandler.js';
 import { catchAsyncErrors } from '../utils/errorUtils.js';
 
+// @desc    Debug endpoint to check escalation flow
+// @route   GET /api/supervisor/debug/escalation
+export const debugEscalation = catchAsyncErrors(async (req, res, next) => {
+  // Debug: Show all FORWARDED complaints
+  const forwardedComplaints = await Complaint.find({ status: 'FORWARDED' }).select('trackingId status forwardedWardOfficeId assignedByAdminId');
+  
+  // Debug: Show total complaints count
+  const totalComplaints = await Complaint.countDocuments();
+  
+  // Debug: Show count by status
+  const statusCounts = await Complaint.aggregate([
+    { $group: { _id: '$status', count: { $sum: 1 } } }
+  ]);
+
+  console.log('[DEBUG] Total Complaints:', totalComplaints);
+  console.log('[DEBUG] Status Distribution:', statusCounts);
+  console.log('[DEBUG] Forwarded Complaints:', forwardedComplaints.length);
+
+  res.status(200).json({
+    success: true,
+    debug: {
+      totalComplaints,
+      statusDistribution: statusCounts,
+      forwardedCount: forwardedComplaints.length,
+      forwardedComplaints: forwardedComplaints
+    }
+  });
+});
+
 // @desc    Get comprehensive dashboard overview
 // @route   GET /api/supervisor/dashboard
 export const getSupervisorDashboard = catchAsyncErrors(async (req, res, next) => {
@@ -184,6 +213,58 @@ export const getOverdueAlerts = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
+// @desc    Get escalated complaints (forwarded to ward offices)
+// @route   GET /api/supervisor/complaints/escalated
+export const getEscalatedComplaints = catchAsyncErrors(async (req, res, next) => {
+  const { limit = 50 } = req.query;
+
+  const escalatedComplaints = await Complaint.find({ status: 'FORWARDED' })
+    .populate('citizenId', 'name email phone')
+    .populate('forwardedWardOfficeId', 'name address wardNumber')
+    .populate('assignedByAdminId', 'name email department')
+    .populate('assignedTeamId', 'name')
+    .sort({ createdAt: -1 })
+    .limit(Number(limit));
+
+  console.log(`[Escalation Query] Found ${escalatedComplaints.length} escalated complaints`);
+
+  const escalatedStats = {
+    total: escalatedComplaints.length,
+    byCategory: {},
+    byPriority: {},
+    byAdmin: {},
+  };
+
+  escalatedComplaints.forEach(complaint => {
+    escalatedStats.byCategory[complaint.category] = (escalatedStats.byCategory[complaint.category] || 0) + 1;
+    escalatedStats.byPriority[complaint.priority] = (escalatedStats.byPriority[complaint.priority] || 0) + 1;
+    if (complaint.assignedByAdminId) {
+      const adminName = complaint.assignedByAdminId.name;
+      escalatedStats.byAdmin[adminName] = (escalatedStats.byAdmin[adminName] || 0) + 1;
+    }
+  });
+
+  const formattedComplaints = escalatedComplaints.map(complaint => ({
+    id: complaint._id,
+    trackingId: complaint.trackingId,
+    title: complaint.title,
+    category: complaint.category,
+    priority: complaint.priority,
+    locality: complaint.locality,
+    createdAt: complaint.createdAt,
+    citizen: complaint.citizenId?.name,
+    wardOffice: complaint.forwardedWardOfficeId?.name || 'N/A',
+    escalatedBy: complaint.assignedByAdminId?.name || 'N/A',
+  }));
+
+  res.status(200).json({
+    success: true,
+    count: formattedComplaints.length,
+    stats: escalatedStats,
+    complaints: formattedComplaints,
+  });
+});
+
 // @desc    Get SLA violation trends
 // @route   GET /api/supervisor/analytics/sla-violations
 export const getSLAViolationTrends = catchAsyncErrors(async (req, res, next) => {
@@ -232,40 +313,81 @@ export const getSLAViolationTrends = catchAsyncErrors(async (req, res, next) => 
 // @desc    Get area heatmap data
 // @route   GET /api/supervisor/analytics/heatmap
 export const getAreaHeatmap = catchAsyncErrors(async (req, res, next) => {
-  const complaints = await Complaint.find({ location: { $exists: true, $ne: null } });
+  // Get complaints grouped by locality with status breakdown
+  const heatmapByLocality = await Complaint.aggregate([
+    {
+      $group: {
+        _id: '$locality',
+        totalComplaints: { $sum: 1 },
+        resolvedComplaints: {
+          $sum: {
+            $cond: [{ $eq: ['$status', 'RESOLVED'] }, 1, 0]
+          }
+        },
+        pendingComplaints: {
+          $sum: {
+            $cond: [
+              {
+                $in: ['$status', ['PENDING', 'ASSIGNED', 'IN_PROGRESS']]
+              },
+              1,
+              0
+            ]
+          }
+        },
+        categories: { $push: '$category' },
+        coordinatePoints: {
+          $push: {
+            $cond: [
+              {
+                $and: [
+                  { $isArray: '$location.coordinates' },
+                  { $gte: [{ $size: '$location.coordinates' }, 2] }
+                ]
+              },
+              '$location.coordinates',
+              null
+            ]
+          }
+        },
+      }
+    },
+    {
+      $sort: { totalComplaints: -1 }
+    },
+    {
+      $limit: 50
+    }
+  ]);
 
-  const heatmapData = complaints
-    .filter(c => c.location && c.location.coordinates)
-    .map(complaint => ({
-      lat: complaint.location.coordinates[1],
-      lng: complaint.location.coordinates[0],
-      locality: complaint.locality,
-      category: complaint.category,
-      status: complaint.status,
-      priority: complaint.priority,
-      trackingId: complaint.trackingId,
-    }));
+  const formattedHeatmapData = heatmapByLocality.map(locality => {
+    const validCoordinatePoints = (locality.coordinatePoints || []).filter(
+      point => Array.isArray(point) && point.length >= 2
+    );
 
-  // Calculate hotspots
-  const hotspots = {};
-  heatmapData.forEach(point => {
-    const key = `${Math.round(point.lat * 100) / 100}_${Math.round(point.lng * 100) / 100}`;
-    hotspots[key] = (hotspots[key] || 0) + 1;
+    const averageCoordinates = validCoordinatePoints.length > 0
+      ? [
+          validCoordinatePoints.reduce((sum, point) => sum + point[0], 0) / validCoordinatePoints.length,
+          validCoordinatePoints.reduce((sum, point) => sum + point[1], 0) / validCoordinatePoints.length,
+        ]
+      : null;
+
+    return {
+      locality: locality._id || 'Unknown',
+      totalComplaints: locality.totalComplaints,
+      resolvedComplaints: locality.resolvedComplaints,
+      pendingComplaints: locality.pendingComplaints,
+      topCategories: [...new Set(locality.categories)].slice(0, 3),
+      coordinates: averageCoordinates,
+    };
   });
 
-  const topHotspots = Object.entries(hotspots)
-    .sort((a, b) => b[1] - a[1])
-    .slice(0, 10)
-    .map(([coordinates, count]) => ({
-      coordinates,
-      complaintCount: count,
-    }));
+  console.log(`[Heatmap] Generated heatmap for ${formattedHeatmapData.length} localities`);
 
   res.status(200).json({
     success: true,
-    totalLocations: heatmapData.length,
-    heatmapData,
-    hotspots: topHotspots,
+    totalLocalities: formattedHeatmapData.length,
+    heatmapData: formattedHeatmapData,
   });
 });
 

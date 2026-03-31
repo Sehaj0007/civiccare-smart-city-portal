@@ -1,7 +1,9 @@
 import express from 'express';
 import {
+  debugEscalation,
   getSupervisorDashboard,
   getOverdueAlerts,
+  getEscalatedComplaints,
   getSLAViolationTrends,
   getAreaHeatmap,
   getActivityTimeline,
@@ -17,6 +19,8 @@ router.use(authorize('SUPERVISOR', 'ADMIN'));
 
 router.get('/dashboard', getSupervisorDashboard);
 router.get('/alerts/overdue', getOverdueAlerts);
+router.get('/complaints/escalated', getEscalatedComplaints);
+router.get('/debug/escalation', debugEscalation);
 router.get('/analytics/sla-violations', getSLAViolationTrends);
 router.get('/analytics/heatmap', getAreaHeatmap);
 router.get('/activity/timeline', getActivityTimeline);

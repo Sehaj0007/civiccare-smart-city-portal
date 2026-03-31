@@ -33,6 +33,9 @@ export const complaintValidation = [
   body('description').trim().notEmpty().withMessage('Description is required'),
   body('locality').trim().notEmpty().withMessage('Locality is required'),
   body('address').trim().notEmpty().withMessage('Address is required'),
+  body('location.type').optional().equals('Point').withMessage('Location type must be Point'),
+  body('location.coordinates').optional().isArray({ min: 2, max: 2 }).withMessage('Location coordinates must include longitude and latitude'),
+  body('location.coordinates.*').optional().isFloat().withMessage('Location coordinates must be valid numbers'),
 ];
 
 export const feedbackValidation = [

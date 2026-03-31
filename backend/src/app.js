@@ -113,6 +113,15 @@ app.get('/health', (req, res) => {
   });
 });
 
+// Public test endpoint (NO AUTH)
+app.get('/api/supervisor/test', (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: 'Supervisor routes are working!',
+    timestamp: new Date().toISOString(),
+  });
+});
+
 // API Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/complaints', complaintRoutes);

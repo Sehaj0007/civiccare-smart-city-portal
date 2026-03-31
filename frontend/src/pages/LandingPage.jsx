@@ -96,13 +96,6 @@ export const LandingPage = () => {
                   <span className="relative z-10">Register Now</span>
                   <div className="absolute inset-0 bg-[#9EF76E] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
                 </Link>
-                <Link
-                  to="/staff-login"
-                  className="group relative px-8 py-4 border border-blue-400 text-blue-300 rounded-lg font-bold text-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/30 hover:scale-105"
-                >
-                  <span className="relative z-10">Staff Login</span>
-                  <div className="absolute inset-0 bg-blue-500/20 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
-                </Link>
               </div>
             </div>
 
@@ -190,7 +183,7 @@ export const LandingPage = () => {
               },
               {
                 emoji: '🏙️',
-                title: '6 Categories',
+                title: 'Services',
                 desc: 'Report issues across all civic needs from Waste to Security management'
               }
             ].map((feature, idx) => (
@@ -249,6 +242,12 @@ export const LandingPage = () => {
               { emoji: '🏗️', title: 'Public Property', desc: 'Benches, public toilets, and signage maintenance' },
               { emoji: '📱', title: 'E-Waste', desc: 'Electronic waste collection and safe disposal' },
               { emoji: '🔒', title: 'Security', desc: 'Safety concerns and suspicious activity reporting' },
+              { emoji: '\u{1F4A7}', title: 'Water Supply', desc: 'Leakage, low pressure, contamination, and pipeline issues' },
+              { emoji: '\u{1F6B0}', title: 'Drainage & Sewage', desc: 'Blocked drains, sewage overflow, and waterlogging complaints' },
+              { emoji: '\u{1F333}', title: 'Parks & Greenery', desc: 'Tree trimming, park maintenance, and damaged public garden spaces' },
+              { emoji: '\u{1F6A6}', title: 'Traffic Signals', desc: 'Faulty traffic lights, road markings, and junction safety issues' },
+              { emoji: '\u{1F415}', title: 'Stray Animals', desc: 'Report stray animal concerns, rescue needs, and nuisance incidents' },
+              { emoji: '\u{1F3E5}', title: 'Public Health', desc: 'Unsanitary areas, mosquito breeding, and local health risk complaints' },
             ].map((cat, idx) => (
               <div 
                 key={idx} 

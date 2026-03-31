@@ -36,9 +36,15 @@ export const adminService = {
 
 // Supervisor Analytics Services
 export const supervisorService = {
-  getDashboard: (params) => api.get('/supervisors/analytics/overview', { params }),
-  getOverdueAlerts: () => api.get('/supervisors/analytics/overdue-alerts'),
-  getHeatmap: () => api.get('/supervisors/analytics/heatmap'),
+  getDashboard: (params) => api.get('/supervisor/dashboard', { params }),
+  getOverdueAlerts: () => api.get('/supervisor/alerts/overdue'),
+  getEscalatedComplaints: (limit = 10) => api.get('/supervisor/complaints/escalated', { params: { limit } }),
+  getSLAViolations: () => api.get('/supervisor/analytics/sla-violations'),
+  getHeatmap: () => api.get('/supervisor/analytics/heatmap'),
+  getActivityTimeline: (limit = 20) => api.get('/supervisor/activity/timeline', { params: { limit } }),
+  getDepartmentComparison: () => api.get('/supervisor/analytics/department-comparison'),
+  exportReport: (format = 'json', params = {}) =>
+    api.get('/supervisor/reports/export', { params: { format, ...params } }),
 };
 
 // Setup Services

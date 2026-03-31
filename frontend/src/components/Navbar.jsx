@@ -109,7 +109,9 @@ export const Navbar = () => {
                   </>
                 )}
                 <div className="flex items-center gap-4 border-l border-[#7ED957]/30 pl-6 ml-2">
-                  <span className="text-gray-300 font-medium">{displayName}</span>
+                  {user?.role !== 'SUPERVISOR' && (
+                    <span className="text-gray-300 font-medium">{displayName}</span>
+                  )}
                   <button
                     onClick={handleLogout}
                     className="px-4 py-2 bg-red-500/90 hover:bg-red-600 text-white rounded-lg transition-all duration-300 font-semibold hover:shadow-lg hover:shadow-red-500/30"
@@ -172,7 +174,7 @@ export const Navbar = () => {
             {isAuthenticated ? (
               <>
                 <div className="px-4 py-2 text-sm font-medium text-[#7ED957] border-b border-[#7ED957]/20 mb-3">
-                  Hello, {displayName}
+                  {user?.role === 'SUPERVISOR' ? 'Supervisor Menu' : `Hello, ${displayName}`}
                 </div>
                 {user?.role === 'ADMIN' ? (
                   <>

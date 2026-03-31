@@ -7,7 +7,9 @@ export const RaiseComplaintPage = () => {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [locationLoading, setLocationLoading] = useState(false);
   const [error, setError] = useState('');
+  const [locationMessage, setLocationMessage] = useState('');
   const [formData, setFormData] = useState({
     title: '',
     category: '',
@@ -16,6 +18,7 @@ export const RaiseComplaintPage = () => {
     locality: '',
     address: '',
     imageUrl: '',
+    location: null,
   });
 
   const categories = [
@@ -63,6 +66,49 @@ export const RaiseComplaintPage = () => {
     }
   };
 
+  const captureCurrentLocation = () => {
+    if (!navigator.geolocation) {
+      setError('Geolocation is not supported by your browser.');
+      return;
+    }
+
+    setLocationLoading(true);
+    setLocationMessage('');
+    setError('');
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const latitude = Number(position.coords.latitude.toFixed(6));
+        const longitude = Number(position.coords.longitude.toFixed(6));
+
+        setFormData((prev) => ({
+          ...prev,
+          location: {
+            type: 'Point',
+            coordinates: [longitude, latitude],
+          },
+        }));
+        setLocationMessage(`Current coordinates captured: ${latitude}, ${longitude}`);
+        setLocationLoading(false);
+      },
+      (geoError) => {
+        const messageByCode = {
+          1: 'Location permission was denied. Please allow location access and try again.',
+          2: 'Unable to detect your location right now. Please try again.',
+          3: 'Location request timed out. Please try again.',
+        };
+
+        setError(messageByCode[geoError.code] || 'Failed to capture your current location.');
+        setLocationLoading(false);
+      },
+      {
+        enableHighAccuracy: true,
+        timeout: 10000,
+        maximumAge: 0,
+      }
+    );
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
@@ -78,7 +124,9 @@ export const RaiseComplaintPage = () => {
         locality: '',
         address: '',
         imageUrl: '',
+        location: null,
       });
+      setLocationMessage('');
       alert('Complaint submitted successfully!');
       navigate('/my-complaints');
     } catch (err) {
@@ -112,6 +160,17 @@ export const RaiseComplaintPage = () => {
                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
               </svg>
               <span className="font-medium">{error}</span>
+            </div>
+          </div>
+        )}
+
+        {locationMessage && (
+          <div className="bg-blue-500/10 border border-blue-500/30 text-blue-300 px-4 py-3 rounded-lg mb-6">
+            <div className="flex items-center gap-2">
+              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v3a1 1 0 102 0V7zm-1 8a1.25 1.25 0 100-2.5A1.25 1.25 0 0010 15z" clipRule="evenodd" />
+              </svg>
+              <span className="font-medium">{locationMessage}</span>
             </div>
           </div>
         )}
@@ -243,6 +302,38 @@ export const RaiseComplaintPage = () => {
                 required
               />
             </div>
+          </div>
+
+          <div className="rounded-xl border border-[#7ED957]/20 bg-[#0a0f0a]/60 p-4">
+            <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+              <div>
+                <h3 className="text-white font-semibold">Pin Exact Location</h3>
+                <p className="text-sm text-gray-400 mt-1">
+                  Capture your current GPS location so supervisors can map this complaint accurately.
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={captureCurrentLocation}
+                disabled={locationLoading}
+                className="px-4 py-2 rounded-lg bg-[#7ED957] text-[#0a0f0a] font-semibold hover:bg-[#9EF76E] disabled:bg-gray-700 disabled:text-gray-400 disabled:cursor-not-allowed"
+              >
+                {locationLoading ? 'Capturing...' : 'Use Current Location'}
+              </button>
+            </div>
+
+            {formData.location?.coordinates && (
+              <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+                <div className="rounded-lg bg-[#111611] border border-[#7ED957]/15 px-3 py-2">
+                  <span className="text-gray-400">Latitude:</span>{' '}
+                  <span className="text-white">{formData.location.coordinates[1]}</span>
+                </div>
+                <div className="rounded-lg bg-[#111611] border border-[#7ED957]/15 px-3 py-2">
+                  <span className="text-gray-400">Longitude:</span>{' '}
+                  <span className="text-white">{formData.location.coordinates[0]}</span>
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Image Upload */}

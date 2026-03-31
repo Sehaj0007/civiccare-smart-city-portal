@@ -5,6 +5,7 @@ import { AuthProvider } from './context/AuthContext';
 import { Navbar } from './components/Navbar';
 import { ProtectedRoute, AdminRoute, StaffRoute } from './components/ProtectedRoute';
 import ErrorBoundary from './components/ErrorBoundary';
+import CivicCareChatbot from './components/CivicCareChatbot';
 
 // Pages
 import { LandingPage } from './pages/LandingPage';
@@ -116,6 +117,7 @@ function App() {
             {/* Catch All */}
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
+          <CivicCareChatbot />
         </AuthProvider>
       </Router>
     </ErrorBoundary>

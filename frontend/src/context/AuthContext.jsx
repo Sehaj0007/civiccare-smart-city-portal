@@ -20,7 +20,7 @@ export const AuthProvider = ({ children }) => {
       return err.response.data.message;
     }
     if (err?.code === 'ERR_NETWORK') {
-      return 'Cannot reach backend API. Ensure backend is running on http://localhost:5000 and try again.';
+      return 'Cannot reach the backend API. Check that the backend server is running and that your network connection is stable, then try again.';
     }
     return fallbackMessage;
   };
