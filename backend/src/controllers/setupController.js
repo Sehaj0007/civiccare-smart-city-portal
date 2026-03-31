@@ -3,6 +3,7 @@ import LabourTeam from '../models/LabourTeam.js';
 import WardOffice from '../models/WardOffice.js';
 import ErrorHandler from '../utils/ErrorHandler.js';
 import { catchAsyncErrors } from '../utils/errorUtils.js';
+import { ensureDepartmentDefaultTeams } from '../utils/defaultTeamUtils.js';
 
 // @desc    Create labour team
 // @route   POST /api/teams
@@ -53,8 +54,7 @@ export const getTeamsByCategory = catchAsyncErrors(async (req, res, next) => {
   };
 
   const mappedCategory = categoryMapping[category] || category;
-
-  const teams = await LabourTeam.find({ departmentCategory: mappedCategory });
+  const teams = await ensureDepartmentDefaultTeams(mappedCategory);
 
   res.status(200).json({
     success: true,

@@ -24,6 +24,7 @@ export const complaintService = {
 export const staffService = {
   getDashboard: (params) => api.get('/staff/dashboard', { params }),
   updateComplaintStatus: (id, data) => api.patch(`/staff/complaints/${id}/status`, data),
+  sendCompletionEmail: (id, data) => api.post(`/staff/complaints/${id}/send-completion-email`, data),
 };
 
 // Admin Services

@@ -4,6 +4,7 @@ import WardOffice from '../models/WardOffice.js';
 import ErrorHandler from '../utils/ErrorHandler.js';
 import { catchAsyncErrors } from '../utils/errorUtils.js';
 import { generateTrackingId } from '../utils/aiDetection.js';
+import { sendComplaintRegisteredEmail } from '../services/emailService.js';
 
 const locationKeywordCoordinates = {
   punjab: [75.3412, 31.1471],
@@ -73,6 +74,11 @@ export const createComplaint = catchAsyncErrors(async (req, res, next) => {
 
   // Populate citizen details
   await complaint.populate('citizenId', 'name email phone');
+
+  await sendComplaintRegisteredEmail({
+    citizen: complaint.citizenId,
+    complaint,
+  });
 
   res.status(201).json({
     success: true,

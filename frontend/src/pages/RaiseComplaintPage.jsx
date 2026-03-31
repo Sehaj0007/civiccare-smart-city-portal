@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { complaintService } from '../services/apiService';
 import { AuthContext } from '../context/AuthContext';
+import toast from 'react-hot-toast';
 
 export const RaiseComplaintPage = () => {
   const { user } = useContext(AuthContext);
@@ -127,7 +128,7 @@ export const RaiseComplaintPage = () => {
         location: null,
       });
       setLocationMessage('');
-      alert('Complaint submitted successfully!');
+      toast.success(`Complaint submitted successfully. A confirmation email has been sent to ${user?.email || 'your registered email address'}.`);
       navigate('/my-complaints');
     } catch (err) {
       if (err.response?.status === 413) {

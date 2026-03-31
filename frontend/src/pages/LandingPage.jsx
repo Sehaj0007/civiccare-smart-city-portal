@@ -230,11 +230,11 @@ export const LandingPage = () => {
               <span className="text-[#7ED957]">Categories</span>
             </h2>
             <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-              Comprehensive coverage of all civic infrastructure aspects
+              Real complaint types citizens commonly report in cities and neighborhoods
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="hidden grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               { emoji: '🗑️', title: 'Waste Management', desc: 'Garbage collection, recycling, and proper disposal' },
               { emoji: '🚗', title: 'Potholes / Roads', desc: 'Road damage, potholes, and maintenance issues' },
@@ -263,6 +263,49 @@ export const LandingPage = () => {
                   maskComposite: 'exclude',
                   padding: '2px'
                 }}></div>
+
+                <div className="text-6xl mb-4 transform transition-all duration-300 group-hover:scale-110 inline-block">
+                  {cat.emoji}
+                </div>
+                <h3 className="text-2xl font-bold mb-3 text-white group-hover:text-[#7ED957] transition-colors duration-300">
+                  {cat.title}
+                </h3>
+                <p className="text-gray-400 leading-relaxed">{cat.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              { emoji: '🗑️', title: 'Garbage Overflow', desc: 'Overflowing bins, missed collection, illegal dumping, and roadside waste buildup.' },
+              { emoji: '🛣️', title: 'Potholes & Broken Roads', desc: 'Potholes, cracked roads, damaged pavements, and unsafe street surfaces.' },
+              { emoji: '⚡', title: 'Streetlight & Power Faults', desc: 'Streetlights not working, exposed wiring, transformer faults, and local outages.' },
+              { emoji: '💧', title: 'Water Leakage', desc: 'Pipeline leakage, low water pressure, dirty water supply, and valve problems.' },
+              { emoji: '🚽', title: 'Drainage & Sewage', desc: 'Blocked drains, sewage overflow, waterlogging, and foul-smell sanitation complaints.' },
+              { emoji: '🏢', title: 'Damaged Public Property', desc: 'Broken benches, damaged bus stops, vandalized signage, and civic asset repairs.' },
+              { emoji: '♻️', title: 'E-Waste Disposal', desc: 'Discarded electronics, collection requests, and unsafe dumping of digital waste.' },
+              { emoji: '🛡️', title: 'Suspicious Activity', desc: 'Unsafe areas, suspicious movement, broken security infrastructure, and public safety issues.' },
+              { emoji: '🐕', title: 'Stray Dog Menace', desc: 'Stray dog complaints, bite-risk zones, aggressive packs, and rescue support needs.' },
+              { emoji: '🏥', title: 'Mosquito Breeding & Health Risks', desc: 'Stagnant water, unhygienic areas, open dumping, and neighborhood health hazards.' },
+              { emoji: '🚌', title: 'Public Transport Problems', desc: 'Bus stop damage, delayed buses, unsafe pickup points, and transport access issues.' },
+              { emoji: '📚', title: 'School Facility Issues', desc: 'Damaged classrooms, broken fans, sanitation gaps, and public education maintenance needs.' },
+            ].map((cat, idx) => (
+              <div
+                key={`real-${idx}`}
+                className="group relative bg-gradient-to-br from-[#0f140f] to-[#1a1f1a] p-8 rounded-2xl border border-[#7ED957]/10 hover:border-[#7ED957]/40 transition-all duration-500 hover:transform hover:-translate-y-2 text-center overflow-hidden"
+              >
+                <div
+                  className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                  style={{
+                    background: 'linear-gradient(90deg, #7ED957, transparent, #7ED957)',
+                    backgroundSize: '200% 100%',
+                    animation: 'shimmer 3s infinite',
+                    WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                    WebkitMaskComposite: 'xor',
+                    maskComposite: 'exclude',
+                    padding: '2px',
+                  }}
+                ></div>
 
                 <div className="text-6xl mb-4 transform transition-all duration-300 group-hover:scale-110 inline-block">
                   {cat.emoji}

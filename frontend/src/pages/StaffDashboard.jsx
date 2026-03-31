@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { staffService } from '../services/apiService';
 import { AuthContext } from '../context/AuthContext';
 import { AlertTriangle, CheckCircle, Clock, FolderKanban, Users } from 'lucide-react';
+import toast from 'react-hot-toast';
 
 export const StaffDashboard = () => {
   const { user } = useContext(AuthContext);
@@ -12,6 +13,7 @@ export const StaffDashboard = () => {
   const [stats, setStats] = useState(null);
   const [complaints, setComplaints] = useState([]);
   const [department, setDepartment] = useState('');
+  const [sendingEmailId, setSendingEmailId] = useState('');
 
   const fetchDashboard = async (teamId) => {
     try {
@@ -37,9 +39,36 @@ export const StaffDashboard = () => {
   const handleStatusUpdate = async (complaintId, status) => {
     try {
       await staffService.updateComplaintStatus(complaintId, { status });
+      toast.success(`Complaint marked as ${status.replace('_', ' ')}`);
       await fetchDashboard(selectedTeam);
     } catch (err) {
       setError(err?.response?.data?.message || 'Failed to update complaint status');
+    }
+  };
+
+  const handleSendCompletionEmail = async (complaint) => {
+    const customMessage = window.prompt(
+      'Enter the completion email message for the citizen:',
+      `Your complaint "${complaint.title}" has been completed by the assigned team.`
+    );
+
+    if (customMessage === null) {
+      return;
+    }
+
+    try {
+      setSendingEmailId(complaint._id);
+      const response = await staffService.sendCompletionEmail(complaint._id, {
+        message: customMessage.trim(),
+      });
+      toast.success(response.data?.message || 'Completion email processed');
+      await fetchDashboard(selectedTeam);
+    } catch (err) {
+      const message = err?.response?.data?.message || 'Failed to send completion email';
+      setError(message);
+      toast.error(message);
+    } finally {
+      setSendingEmailId('');
     }
   };
 
@@ -176,16 +205,27 @@ export const StaffDashboard = () => {
                         <div className="flex gap-2">
                           <button
                             onClick={() => handleStatusUpdate(complaint._id, 'IN_PROGRESS')}
+                            disabled={complaint.status === 'IN_PROGRESS' || complaint.status === 'RESOLVED'}
                             className="rounded-md bg-purple-500/20 px-3 py-1 text-purple-300"
                           >
                             Start
                           </button>
                           <button
                             onClick={() => handleStatusUpdate(complaint._id, 'RESOLVED')}
+                            disabled={complaint.status === 'RESOLVED'}
                             className="rounded-md bg-green-500/20 px-3 py-1 text-green-300"
                           >
                             Complete
                           </button>
+                          {complaint.status === 'RESOLVED' && (
+                            <button
+                              onClick={() => handleSendCompletionEmail(complaint)}
+                              disabled={sendingEmailId === complaint._id}
+                              className="rounded-md bg-blue-500/20 px-3 py-1 text-blue-300 disabled:opacity-60"
+                            >
+                              {sendingEmailId === complaint._id ? 'Sending...' : 'Send Mail'}
+                            </button>
+                          )}
                         </div>
                       </td>
                     </tr>

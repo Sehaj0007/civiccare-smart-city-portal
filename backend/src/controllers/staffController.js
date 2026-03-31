@@ -3,6 +3,8 @@ import LabourTeam from '../models/LabourTeam.js';
 import ErrorHandler from '../utils/ErrorHandler.js';
 import { catchAsyncErrors } from '../utils/errorUtils.js';
 import { emitStatusUpdate, emitToAdminChannel } from '../config/socketIO.js';
+import { sendComplaintCompletionEmail } from '../services/emailService.js';
+import { ensureDepartmentDefaultTeams } from '../utils/defaultTeamUtils.js';
 
 const buildStats = (complaints) => ({
   total: complaints.length,
@@ -23,7 +25,7 @@ export const getStaffDashboard = catchAsyncErrors(async (req, res, next) => {
   }
 
   const { teamId } = req.query;
-  const teams = await LabourTeam.find({ departmentCategory: req.user.department }).sort({ teamName: 1 });
+  const teams = await ensureDepartmentDefaultTeams(req.user.department);
 
   if (!teams.length) {
     return next(new ErrorHandler('No teams found for this department', 404));
@@ -125,5 +127,62 @@ export const updateStaffComplaintStatus = catchAsyncErrors(async (req, res, next
     success: true,
     message: 'Complaint status updated successfully',
     complaint,
+  });
+});
+
+export const sendStaffCompletionEmail = catchAsyncErrors(async (req, res, next) => {
+  if (req.user.role !== 'TEAM_MEMBER') {
+    return next(new ErrorHandler('Only staff members can send completion emails', 403));
+  }
+
+  const { message } = req.body;
+  const complaint = await Complaint.findById(req.params.id)
+    .populate('citizenId', 'name email phone')
+    .populate('assignedTeamId', 'teamName departmentCategory');
+
+  if (!complaint) {
+    return next(new ErrorHandler('Complaint not found', 404));
+  }
+
+  if (!complaint.assignedTeamId) {
+    return next(new ErrorHandler('Complaint is not assigned to a team yet', 400));
+  }
+
+  if (complaint.status !== 'RESOLVED') {
+    return next(new ErrorHandler('Completion email can only be sent for resolved complaints', 400));
+  }
+
+  const team = await LabourTeam.findById(complaint.assignedTeamId._id || complaint.assignedTeamId);
+
+  if (!team || team.departmentCategory !== req.user.department) {
+    return next(new ErrorHandler('You can only send emails for complaints assigned to your department team', 403));
+  }
+
+  const emailResult = await sendComplaintCompletionEmail({
+    citizen: complaint.citizenId,
+    complaint,
+    teamName: complaint.assignedTeamId?.teamName || team.teamName,
+    message,
+  });
+
+  if (emailResult?.success === false) {
+    return next(new ErrorHandler(`Failed to send completion email: ${emailResult.error}`, 500));
+  }
+
+  if (message) {
+    complaint.remarks.push({
+      addedBy: req.user._id,
+      text: `Completion email sent to citizen: ${message}`,
+      timestamp: new Date(),
+    });
+
+    await complaint.save();
+  }
+
+  res.status(200).json({
+    success: true,
+    message: emailResult?.skipped
+      ? 'Completion email skipped because SMTP is not configured'
+      : 'Completion email sent successfully',
   });
 });
