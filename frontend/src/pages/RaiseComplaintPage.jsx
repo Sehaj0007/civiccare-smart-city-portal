@@ -2,19 +2,24 @@ import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { complaintService } from '../services/apiService';
 import { AuthContext } from '../context/AuthContext';
+import toast from 'react-hot-toast';
 
 export const RaiseComplaintPage = () => {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [locationLoading, setLocationLoading] = useState(false);
   const [error, setError] = useState('');
+  const [locationMessage, setLocationMessage] = useState('');
   const [formData, setFormData] = useState({
+    title: '',
     category: '',
     complaintType: '',
     description: '',
     locality: '',
     address: '',
     imageUrl: '',
+    location: null,
   });
 
   const categories = [
@@ -24,6 +29,10 @@ export const RaiseComplaintPage = () => {
     { value: 'PUBLIC_PROPERTY', label: 'Vandalised Public Property', icon: '🏗️' },
     { value: 'E_WASTE', label: 'E-Waste Management', icon: '📱' },
     { value: 'SECURITY', label: 'Security & Threat Awareness', icon: '🔒' },
+    { value: 'HEALTH', label: 'Health & Sanitation', icon: '🏥' },
+    { value: 'ENVIRONMENT', label: 'Environmental Issues', icon: '🌿' },
+    { value: 'TRANSPORT', label: 'Public Transport', icon: '🚌' },
+    { value: 'EDUCATION', label: 'Education Facilities', icon: '📚' },
   ];
 
   const complaintTypes = {
@@ -33,6 +42,10 @@ export const RaiseComplaintPage = () => {
     PUBLIC_PROPERTY: ['Damaged Bench', 'Broken Toilet', 'Vandalised Signage'],
     E_WASTE: ['E-Waste Pickup Request', 'Improper Disposal'],
     SECURITY: ['Suspicious Activity', 'Unsafe Condition', 'Street Crime'],
+    HEALTH: ['Medical Waste', 'Sanitation Issue', 'Health Hazard'],
+    ENVIRONMENT: ['Air Pollution', 'Water Pollution', 'Noise Pollution'],
+    TRANSPORT: ['Bus Delay', 'Traffic Signal Issue', 'Parking Problem'],
+    EDUCATION: ['School Maintenance', 'Teacher Shortage', 'Facility Issue'],
   };
 
   const handleChange = (e) => {
@@ -54,6 +67,49 @@ export const RaiseComplaintPage = () => {
     }
   };
 
+  const captureCurrentLocation = () => {
+    if (!navigator.geolocation) {
+      setError('Geolocation is not supported by your browser.');
+      return;
+    }
+
+    setLocationLoading(true);
+    setLocationMessage('');
+    setError('');
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const latitude = Number(position.coords.latitude.toFixed(6));
+        const longitude = Number(position.coords.longitude.toFixed(6));
+
+        setFormData((prev) => ({
+          ...prev,
+          location: {
+            type: 'Point',
+            coordinates: [longitude, latitude],
+          },
+        }));
+        setLocationMessage(`Current coordinates captured: ${latitude}, ${longitude}`);
+        setLocationLoading(false);
+      },
+      (geoError) => {
+        const messageByCode = {
+          1: 'Location permission was denied. Please allow location access and try again.',
+          2: 'Unable to detect your location right now. Please try again.',
+          3: 'Location request timed out. Please try again.',
+        };
+
+        setError(messageByCode[geoError.code] || 'Failed to capture your current location.');
+        setLocationLoading(false);
+      },
+      {
+        enableHighAccuracy: true,
+        timeout: 10000,
+        maximumAge: 0,
+      }
+    );
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
@@ -62,14 +118,17 @@ export const RaiseComplaintPage = () => {
     try {
       await complaintService.createComplaint(formData);
       setFormData({
+        title: '',
         category: '',
         complaintType: '',
         description: '',
         locality: '',
         address: '',
         imageUrl: '',
+        location: null,
       });
-      alert('Complaint submitted successfully!');
+      setLocationMessage('');
+      toast.success(`Complaint submitted successfully. A confirmation email has been sent to ${user?.email || 'your registered email address'}.`);
       navigate('/my-complaints');
     } catch (err) {
       if (err.response?.status === 413) {
@@ -106,6 +165,17 @@ export const RaiseComplaintPage = () => {
           </div>
         )}
 
+        {locationMessage && (
+          <div className="bg-blue-500/10 border border-blue-500/30 text-blue-300 px-4 py-3 rounded-lg mb-6">
+            <div className="flex items-center gap-2">
+              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v3a1 1 0 102 0V7zm-1 8a1.25 1.25 0 100-2.5A1.25 1.25 0 0010 15z" clipRule="evenodd" />
+              </svg>
+              <span className="font-medium">{locationMessage}</span>
+            </div>
+          </div>
+        )}
+
         {/* Form */}
         <form onSubmit={handleSubmit} className="bg-gradient-to-br from-[#0f140f] to-[#1a1f1a] rounded-2xl shadow-xl p-8 space-y-6 border border-[#7ED957]/20">
           {/* Category Selection */}
@@ -130,6 +200,25 @@ export const RaiseComplaintPage = () => {
                 </option>
               ))}
             </select>
+          </div>
+
+          {/* Title */}
+          <div>
+            <label className="block text-gray-300 font-semibold mb-3 flex items-center gap-2">
+              <svg className="w-5 h-5 text-[#7ED957]" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clipRule="evenodd" />
+              </svg>
+              Complaint Title *
+            </label>
+            <input
+              type="text"
+              name="title"
+              value={formData.title}
+              onChange={handleChange}
+              className="w-full px-4 py-3 bg-[#0a0f0a] border-2 border-[#7ED957]/30 text-white rounded-xl focus:outline-none focus:border-[#7ED957] focus:ring-2 focus:ring-[#7ED957]/20 transition-all duration-200 placeholder-gray-500"
+              placeholder="Brief title for your complaint"
+              required
+            />
           </div>
 
           {/* Complaint Type */}
@@ -216,6 +305,38 @@ export const RaiseComplaintPage = () => {
             </div>
           </div>
 
+          <div className="rounded-xl border border-[#7ED957]/20 bg-[#0a0f0a]/60 p-4">
+            <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+              <div>
+                <h3 className="text-white font-semibold">Pin Exact Location</h3>
+                <p className="text-sm text-gray-400 mt-1">
+                  Capture your current GPS location so supervisors can map this complaint accurately.
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={captureCurrentLocation}
+                disabled={locationLoading}
+                className="px-4 py-2 rounded-lg bg-[#7ED957] text-[#0a0f0a] font-semibold hover:bg-[#9EF76E] disabled:bg-gray-700 disabled:text-gray-400 disabled:cursor-not-allowed"
+              >
+                {locationLoading ? 'Capturing...' : 'Use Current Location'}
+              </button>
+            </div>
+
+            {formData.location?.coordinates && (
+              <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+                <div className="rounded-lg bg-[#111611] border border-[#7ED957]/15 px-3 py-2">
+                  <span className="text-gray-400">Latitude:</span>{' '}
+                  <span className="text-white">{formData.location.coordinates[1]}</span>
+                </div>
+                <div className="rounded-lg bg-[#111611] border border-[#7ED957]/15 px-3 py-2">
+                  <span className="text-gray-400">Longitude:</span>{' '}
+                  <span className="text-white">{formData.location.coordinates[0]}</span>
+                </div>
+              </div>
+            )}
+          </div>
+
           {/* Image Upload */}
           <div>
             <label className="block text-gray-300 font-semibold mb-3 flex items-center gap-2">
@@ -277,7 +398,7 @@ export const RaiseComplaintPage = () => {
         </form>
       </div>
 
-      <style jsx>{`
+      <style jsx="true">{`
         @keyframes fadeIn {
           from {
             opacity: 0;

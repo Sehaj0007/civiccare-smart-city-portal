@@ -4,6 +4,38 @@ import WardOffice from '../models/WardOffice.js';
 import ErrorHandler from '../utils/ErrorHandler.js';
 import { catchAsyncErrors } from '../utils/errorUtils.js';
 
+const getAdminComplaintCategory = (department) => {
+  const departmentMapping = {
+    ROAD_MAINTENANCE: 'POTHOLES',
+  };
+
+  return departmentMapping[department] || department;
+};
+
+const getComplaintCategoryForTeam = (departmentCategory) => {
+  const categoryMapping = {
+    ROAD_MAINTENANCE: 'POTHOLES',
+  };
+
+  return categoryMapping[departmentCategory] || departmentCategory;
+};
+
+const ensureAdminCanAccessComplaint = (req, complaint, next) => {
+  const adminCategory = getAdminComplaintCategory(req.user?.department);
+
+  if (!adminCategory) {
+    next(new ErrorHandler('Admin department is not configured', 403));
+    return false;
+  }
+
+  if (complaint.category !== adminCategory) {
+    next(new ErrorHandler('You can only access complaints from your own department', 403));
+    return false;
+  }
+
+  return true;
+};
+
 // @desc    Assign complaint to labour team
 // @route   POST /api/admin/assign-team
 export const assignTeam = catchAsyncErrors(async (req, res, next) => {
@@ -15,22 +47,36 @@ export const assignTeam = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHandler('Complaint not found', 404));
   }
 
+  if (!ensureAdminCanAccessComplaint(req, complaint, next)) return;
+
   const team = await LabourTeam.findById(teamId);
 
   if (!team) {
     return next(new ErrorHandler('Labour team not found', 404));
   }
 
+  if (getComplaintCategoryForTeam(team.departmentCategory) !== complaint.category) {
+    return next(new ErrorHandler('You can only assign teams from your own department', 403));
+  }
+
   // Update complaint
   complaint.status = 'ASSIGNED';
-  complaint.actionType = 'ASSIGNED';
   complaint.assignedTeamId = teamId;
   complaint.assignedByAdminId = req.user._id;
-  complaint.remarks = remarks || '';
+  if (remarks) {
+    complaint.remarks.push({
+      status: 'ASSIGNED',
+      timestamp: new Date(),
+      remarks: remarks,
+    });
+  }
 
   await complaint.save();
 
   // Add complaint to team's assigned complaints
+  if (!team.assignedComplaints) {
+    team.assignedComplaints = [];
+  }
   if (!team.assignedComplaints.includes(complaintId)) {
     team.assignedComplaints.push(complaintId);
     await team.save();
@@ -59,6 +105,8 @@ export const escalateComplaint = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHandler('Complaint not found', 404));
   }
 
+  if (!ensureAdminCanAccessComplaint(req, complaint, next)) return;
+
   const wardOffice = await WardOffice.findById(wardOfficeId);
 
   if (!wardOffice) {
@@ -70,9 +118,16 @@ export const escalateComplaint = catchAsyncErrors(async (req, res, next) => {
   complaint.actionType = 'FORWARDED';
   complaint.forwardedWardOfficeId = wardOfficeId;
   complaint.assignedByAdminId = req.user._id;
-  complaint.remarks = remarks || '';
+  if (remarks) {
+    complaint.remarks.push({
+      status: 'FORWARDED',
+      timestamp: new Date(),
+      remarks: remarks,
+    });
+  }
 
   await complaint.save();
+  console.log(`[Escalation] Complaint ${complaint.trackingId} escalated with status: ${complaint.status}`);
 
   // Add complaint to ward office's forwarded complaints
   if (!wardOffice.forwardedComplaints.includes(complaintId)) {
@@ -96,6 +151,14 @@ export const escalateComplaint = catchAsyncErrors(async (req, res, next) => {
 // @route   PATCH /api/admin/complaints/:id/status
 export const updateStatus = catchAsyncErrors(async (req, res, next) => {
   const { status, remarks } = req.body;
+
+  const existingComplaint = await Complaint.findById(req.params.id);
+
+  if (!existingComplaint) {
+    return next(new ErrorHandler('Complaint not found', 404));
+  }
+
+  if (!ensureAdminCanAccessComplaint(req, existingComplaint, next)) return;
 
   const updateData = { status };
   if (remarks) updateData.remarks = remarks;
@@ -124,23 +187,38 @@ export const updateStatus = catchAsyncErrors(async (req, res, next) => {
 // @desc    Get department-wise complaints
 // @route   GET /api/admin/complaints/department/:category
 export const getDepartmentComplaints = catchAsyncErrors(async (req, res, next) => {
-  const { category } = req.params;
+  const requestedCategory = req.params.category;
   const { status } = req.query;
+  const adminCategory = getAdminComplaintCategory(req.user?.department);
 
   const validCategories = [
     'WASTE_MANAGEMENT',
     'POTHOLES',
     'ELECTRICITY',
+    'WATER',
+    'SANITATION',
     'PUBLIC_PROPERTY',
     'E_WASTE',
     'SECURITY',
+    'HEALTH',
+    'ENVIRONMENT',
+    'TRANSPORT',
+    'EDUCATION',
   ];
 
-  if (!validCategories.includes(category)) {
+  if (!adminCategory) {
+    return next(new ErrorHandler('Admin department is not configured', 403));
+  }
+
+  if (!validCategories.includes(requestedCategory)) {
     return next(new ErrorHandler('Invalid category', 400));
   }
 
-  let query = { category };
+  if (requestedCategory !== adminCategory) {
+    return next(new ErrorHandler('You can only access your own department dashboard', 403));
+  }
+
+  let query = { category: adminCategory };
 
   if (status) {
     query.status = status;
@@ -165,7 +243,7 @@ export const getDepartmentComplaints = catchAsyncErrors(async (req, res, next) =
 
   res.status(200).json({
     success: true,
-    category,
+    category: adminCategory,
     stats,
     complaints,
   });

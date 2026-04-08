@@ -5,6 +5,7 @@ export const authService = {
   register: (userData) => api.post('/auth/register', userData),
   login: (credentials) => api.post('/auth/login', credentials),
   adminLogin: (credentials) => api.post('/auth/admin-login', credentials),
+  supervisorLogin: (credentials) => api.post('/auth/supervisor-login', credentials),
   getMe: () => api.get('/auth/me'),
   logout: () => api.get('/auth/logout'),
 };
@@ -20,12 +21,31 @@ export const complaintService = {
   getStats: () => api.get('/complaints/stats/overview'),
 };
 
+export const staffService = {
+  getDashboard: (params) => api.get('/staff/dashboard', { params }),
+  updateComplaintStatus: (id, data) => api.patch(`/staff/complaints/${id}/status`, data),
+  sendCompletionEmail: (id, data) => api.post(`/staff/complaints/${id}/send-completion-email`, data),
+};
+
 // Admin Services
 export const adminService = {
   assignTeam: (data) => api.post('/admin/assign-team', data),
   escalateComplaint: (data) => api.post('/admin/escalate', data),
   updateStatus: (id, data) => api.patch(`/admin/complaints/${id}/status`, data),
   getDepartmentComplaints: (category, params) => api.get(`/admin/complaints/department/${category}`, { params }),
+};
+
+// Supervisor Analytics Services
+export const supervisorService = {
+  getDashboard: (params) => api.get('/supervisor/dashboard', { params }),
+  getOverdueAlerts: () => api.get('/supervisor/alerts/overdue'),
+  getEscalatedComplaints: (limit = 10) => api.get('/supervisor/complaints/escalated', { params: { limit } }),
+  getSLAViolations: () => api.get('/supervisor/analytics/sla-violations'),
+  getHeatmap: () => api.get('/supervisor/analytics/heatmap'),
+  getActivityTimeline: (limit = 20) => api.get('/supervisor/activity/timeline', { params: { limit } }),
+  getDepartmentComparison: () => api.get('/supervisor/analytics/department-comparison'),
+  exportReport: (format = 'json', params = {}) =>
+    api.get('/supervisor/reports/export', { params: { format, ...params } }),
 };
 
 // Setup Services

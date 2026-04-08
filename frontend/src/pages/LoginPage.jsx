@@ -3,7 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { LoadingSpinner } from '../components/LoadingSpinner';
 
-export const LoginPage = ({ isAdmin = false }) => {
+export const LoginPage = ({ isAdmin = false, isStaff = false }) => {
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -19,10 +19,24 @@ export const LoginPage = ({ isAdmin = false }) => {
     setError('');
     setLoading(true);
 
-    const result = await login(formData.email, formData.password, isAdmin);
+    const normalizedEmail = formData.email.trim().toLowerCase();
+    const result = await login(normalizedEmail, formData.password, isAdmin);
 
     if (result.success) {
-      navigate(isAdmin ? '/admin-dashboard' : '/my-complaints');
+      const adminDepartmentMap = {
+        ROAD_MAINTENANCE: 'POTHOLES',
+      };
+      const adminDepartment = adminDepartmentMap[result.user?.department] || result.user?.department;
+      const destination =
+        result.user?.role === 'ADMIN'
+          ? adminDepartment
+            ? `/admin/department/${adminDepartment}`
+            : '/admin-dashboard'
+          : result.user?.role === 'TEAM_MEMBER'
+            ? '/staff-dashboard'
+            : '/my-complaints';
+
+      navigate(destination);
     } else {
       setError(result.error || 'Login failed');
     }
@@ -55,7 +69,7 @@ export const LoginPage = ({ isAdmin = false }) => {
             <span className="text-[#7ED957]">Care</span>
           </h1>
           <h2 className="text-xl font-semibold text-gray-400">
-            {isAdmin ? 'Admin Login' : 'Citizen Login'}
+            {isAdmin ? 'Admin Login' : isStaff ? 'Staff Login' : 'Citizen Login'}
           </h2>
           
           {/* Decorative Line */}
@@ -89,6 +103,7 @@ export const LoginPage = ({ isAdmin = false }) => {
               name="email"
               value={formData.email}
               onChange={handleChange}
+              autoComplete="email"
               className="w-full px-4 py-3 bg-[#0a0f0a] border-2 border-[#7ED957]/30 text-white rounded-xl focus:outline-none focus:border-[#7ED957] focus:ring-2 focus:ring-[#7ED957]/20 transition-all duration-200 placeholder-gray-500"
               placeholder="Enter your email"
               required
@@ -107,6 +122,7 @@ export const LoginPage = ({ isAdmin = false }) => {
               name="password"
               value={formData.password}
               onChange={handleChange}
+              autoComplete="current-password"
               className="w-full px-4 py-3 bg-[#0a0f0a] border-2 border-[#7ED957]/30 text-white rounded-xl focus:outline-none focus:border-[#7ED957] focus:ring-2 focus:ring-[#7ED957]/20 transition-all duration-200 placeholder-gray-500"
               placeholder="Enter your password"
               required
@@ -135,7 +151,7 @@ export const LoginPage = ({ isAdmin = false }) => {
         </form>
 
         {/* Register Link for Citizens */}
-        {!isAdmin && (
+        {!isAdmin && !isStaff && (
           <div className="mt-8 text-center">
             <div className="relative">
               <div className="absolute inset-0 flex items-center">
@@ -161,7 +177,7 @@ export const LoginPage = ({ isAdmin = false }) => {
         )}
 
         {/* Admin Access Link for Citizen Login */}
-        {!isAdmin && (
+        {!isAdmin && !isStaff && (
           <div className="mt-6 text-center">
             <Link 
               to="/admin-login" 
@@ -183,9 +199,20 @@ export const LoginPage = ({ isAdmin = false }) => {
             </Link>
           </div>
         )}
+
+        {isStaff && (
+          <div className="mt-6 text-center">
+            <Link 
+              to="/login" 
+              className="text-sm text-gray-500 hover:text-[#7ED957] transition-colors duration-200"
+            >
+              ← Citizen Login
+            </Link>
+          </div>
+        )}
       </div>
 
-      <style jsx>{`
+      <style>{`
         @keyframes fadeIn {
           from {
             opacity: 0;

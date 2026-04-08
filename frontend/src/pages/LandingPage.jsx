@@ -96,18 +96,6 @@ export const LandingPage = () => {
                   <span className="relative z-10">Register Now</span>
                   <div className="absolute inset-0 bg-[#9EF76E] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
                 </Link>
-                <Link
-                  to="/login"
-                  className="px-8 py-4 border-2 border-[#7ED957] text-[#7ED957] rounded-lg font-bold text-lg hover:bg-[#7ED957] hover:text-[#0a0f0a] transition-all duration-300 hover:scale-105"
-                >
-                  Citizen Login
-                </Link>
-                <Link
-                  to="/admin-login"
-                  className="px-8 py-4 bg-white/5 border-2 border-white/10 text-white rounded-lg font-bold text-lg hover:bg-white/10 transition-all duration-300 hover:scale-105"
-                >
-                  Admin Portal
-                </Link>
               </div>
             </div>
 
@@ -195,7 +183,7 @@ export const LandingPage = () => {
               },
               {
                 emoji: '🏙️',
-                title: '6 Categories',
+                title: 'Services',
                 desc: 'Report issues across all civic needs from Waste to Security management'
               }
             ].map((feature, idx) => (
@@ -242,11 +230,11 @@ export const LandingPage = () => {
               <span className="text-[#7ED957]">Categories</span>
             </h2>
             <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-              Comprehensive coverage of all civic infrastructure aspects
+              Real complaint types citizens commonly report in cities and neighborhoods
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="hidden grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               { emoji: '🗑️', title: 'Waste Management', desc: 'Garbage collection, recycling, and proper disposal' },
               { emoji: '🚗', title: 'Potholes / Roads', desc: 'Road damage, potholes, and maintenance issues' },
@@ -254,6 +242,12 @@ export const LandingPage = () => {
               { emoji: '🏗️', title: 'Public Property', desc: 'Benches, public toilets, and signage maintenance' },
               { emoji: '📱', title: 'E-Waste', desc: 'Electronic waste collection and safe disposal' },
               { emoji: '🔒', title: 'Security', desc: 'Safety concerns and suspicious activity reporting' },
+              { emoji: '\u{1F4A7}', title: 'Water Supply', desc: 'Leakage, low pressure, contamination, and pipeline issues' },
+              { emoji: '\u{1F6B0}', title: 'Drainage & Sewage', desc: 'Blocked drains, sewage overflow, and waterlogging complaints' },
+              { emoji: '\u{1F333}', title: 'Parks & Greenery', desc: 'Tree trimming, park maintenance, and damaged public garden spaces' },
+              { emoji: '\u{1F6A6}', title: 'Traffic Signals', desc: 'Faulty traffic lights, road markings, and junction safety issues' },
+              { emoji: '\u{1F415}', title: 'Stray Animals', desc: 'Report stray animal concerns, rescue needs, and nuisance incidents' },
+              { emoji: '\u{1F3E5}', title: 'Public Health', desc: 'Unsanitary areas, mosquito breeding, and local health risk complaints' },
             ].map((cat, idx) => (
               <div 
                 key={idx} 
@@ -269,6 +263,49 @@ export const LandingPage = () => {
                   maskComposite: 'exclude',
                   padding: '2px'
                 }}></div>
+
+                <div className="text-6xl mb-4 transform transition-all duration-300 group-hover:scale-110 inline-block">
+                  {cat.emoji}
+                </div>
+                <h3 className="text-2xl font-bold mb-3 text-white group-hover:text-[#7ED957] transition-colors duration-300">
+                  {cat.title}
+                </h3>
+                <p className="text-gray-400 leading-relaxed">{cat.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              { emoji: '🗑️', title: 'Garbage Overflow', desc: 'Overflowing bins, missed collection, illegal dumping, and roadside waste buildup.' },
+              { emoji: '🛣️', title: 'Potholes & Broken Roads', desc: 'Potholes, cracked roads, damaged pavements, and unsafe street surfaces.' },
+              { emoji: '⚡', title: 'Streetlight & Power Faults', desc: 'Streetlights not working, exposed wiring, transformer faults, and local outages.' },
+              { emoji: '💧', title: 'Water Leakage', desc: 'Pipeline leakage, low water pressure, dirty water supply, and valve problems.' },
+              { emoji: '🚽', title: 'Drainage & Sewage', desc: 'Blocked drains, sewage overflow, waterlogging, and foul-smell sanitation complaints.' },
+              { emoji: '🏢', title: 'Damaged Public Property', desc: 'Broken benches, damaged bus stops, vandalized signage, and civic asset repairs.' },
+              { emoji: '♻️', title: 'E-Waste Disposal', desc: 'Discarded electronics, collection requests, and unsafe dumping of digital waste.' },
+              { emoji: '🛡️', title: 'Suspicious Activity', desc: 'Unsafe areas, suspicious movement, broken security infrastructure, and public safety issues.' },
+              { emoji: '🐕', title: 'Stray Dog Menace', desc: 'Stray dog complaints, bite-risk zones, aggressive packs, and rescue support needs.' },
+              { emoji: '🏥', title: 'Mosquito Breeding & Health Risks', desc: 'Stagnant water, unhygienic areas, open dumping, and neighborhood health hazards.' },
+              { emoji: '🚌', title: 'Public Transport Problems', desc: 'Bus stop damage, delayed buses, unsafe pickup points, and transport access issues.' },
+              { emoji: '📚', title: 'School Facility Issues', desc: 'Damaged classrooms, broken fans, sanitation gaps, and public education maintenance needs.' },
+            ].map((cat, idx) => (
+              <div
+                key={`real-${idx}`}
+                className="group relative bg-gradient-to-br from-[#0f140f] to-[#1a1f1a] p-8 rounded-2xl border border-[#7ED957]/10 hover:border-[#7ED957]/40 transition-all duration-500 hover:transform hover:-translate-y-2 text-center overflow-hidden"
+              >
+                <div
+                  className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                  style={{
+                    background: 'linear-gradient(90deg, #7ED957, transparent, #7ED957)',
+                    backgroundSize: '200% 100%',
+                    animation: 'shimmer 3s infinite',
+                    WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                    WebkitMaskComposite: 'xor',
+                    maskComposite: 'exclude',
+                    padding: '2px',
+                  }}
+                ></div>
 
                 <div className="text-6xl mb-4 transform transition-all duration-300 group-hover:scale-110 inline-block">
                   {cat.emoji}
@@ -419,7 +456,7 @@ export const LandingPage = () => {
       </div>
 
       {/* Animations */}
-      <style jsx>{`
+      <style>{`
         @keyframes fadeIn {
           from { opacity: 0; }
           to { opacity: 1; }

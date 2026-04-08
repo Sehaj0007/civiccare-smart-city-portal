@@ -32,24 +32,36 @@ const userSchema = new mongoose.Schema(
     },
     role: {
       type: String,
-      enum: ['USER', 'ADMIN'],
+      enum: ['USER', 'ADMIN', 'SUPERVISOR', 'TEAM_MEMBER'],
       default: 'USER',
     },
     department: {
       type: String,
       enum: [
         'WASTE_MANAGEMENT',
+        'POTHOLES',
         'ROAD_MAINTENANCE',
         'ELECTRICITY',
+        'WATER',
+        'SANITATION',
         'PUBLIC_PROPERTY',
         'E_WASTE',
         'SECURITY',
+        'HEALTH',
+        'ENVIRONMENT',
+        'TRANSPORT',
+        'EDUCATION',
       ],
       default: null,
     },
     isActive: {
       type: Boolean,
       default: true,
+    },
+    assignedTeamId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'LabourTeam',
+      default: null,
     },
     createdAt: {
       type: Date,
